@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Master</title>
+
+    <!-- JQuery CDN -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"
+    ></script>
+
+    <!-- Moment CDN (for date) -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+    ></script>
+
+    <!-- Daterangepicker CDN -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+    ></script>
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css" integrity="sha512-Z/def5z5u2aR89OuzYcxmDJ0Bnd5V1cKqBEbvLOiUNWdg9PQeXVvXLI90SE4QOHGlfLqUnDNVAYyZi8UwUTmWQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+
+    <link rel="stylesheet" href="bootsrap.css" />
+    <link rel="stylesheet" href="bootstrapSelect.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="daterange.css" />
+    <link rel = "icon" href ="./images/logo.svg" type = "image/x-icon">
+
+
+    <!-- Bootstrap CDN -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap Select CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+  </head>
+  <body>
+ 
+   
+
+    <!-- Main Section Starts -->
+    <main>
+      <!-- Left Section Starts -->
+      <aside style="display: none">
+        <!-- Filter Container Starts -->
+        <div id="filter-container" style="display: block">
+          <!-- Filter Item name (input) -->
+          <div class="items">
+              <div class="filter-catergory" onclick="handleCategory(this)">
+               Ladders
+              </div>
+            </div>
+          </div>
+          <!-- Filter Item status (options) -->
+          <div class="items">
+            <div class="filter-catergory" onclick="handleCategory(this)">
+            Kickers
+            </div>
+          </div>
+          <!-- Filter Item configuration (options) -->
+          <div class="items">
+            <div class="filter-catergory" onclick="handleCategory(this)">
+            Executive Incentive 
+            </div>
+          </div>
+          <!-- Filter Item homeLocation (search)-->
+          <div class="items">
+            <div class="filter-catergory" onclick="handleToggle(this)">
+             Select Location
+              <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+            </div>
+
+            <div
+              class="filter-items"
+              data-ns="homeLocation"
+              data-type="search"
+              style="display: none"
+            >
+              <select
+                class="search_source selectpicker"
+                id="search_location_main"
+                data-live-search="true"
+                data-actions-box="true"
+                style="width: 100%"
+                title="Search  location.."
+              >
+                
+              </select>
+            </div>
+          </div>
+          <!-- Filter Item locationIntent (search)-->
+          <div class="items">
+            <div class="filter-catergory" onclick="handleToggle(this)">
+              Select Developer 
+              <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+            </div>
+            <div
+              class="filter-items"
+              data-ns="locationIntent"
+              data-type="search"
+              style="display: none"
+            >
+              <select
+                class="search_source selectpicker"
+                id="search_developer_main"
+                data-live-search="true"
+                data-actions-box="true"
+                style="width: 100%"
+                title="Search Developer.."
+              >
+                
+              </select>
+            </div>
+          </div>
+          <!-- Filter Item locality (search)-->
+          <div class="items">
+            <div class="filter-catergory" onclick="handleToggle(this)">
+              Select Project
+              <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+            </div>
+            <div
+              class="filter-items"
+              data-ns="locality"
+              data-type="search"
+              style="display: none"
+            >
+              <select
+                class="search_source selectpicker"
+                id="search_project_main"
+                data-live-search="true"
+                data-actions-box="true"
+                style="width: 100%"
+                title="Search Project.."
+              >
+                
+              </select>
+            </div>
+          </div>
+          
+        
+          <!-- Filter Item addedOn (daterange) -->
+          <div class="items">
+            <div class="filter-catergory" onclick="handleToggle(this)">
+              Filter Date
+              <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+            </div>
+
+            <div
+              class="filter-items"
+              data-ns="addedOn"
+              data-type="daterange"
+              style="display: none"
+            >
+              <input
+                type="text"
+                name="datefilter"
+                value=""
+                placeholder="Select Date"
+                id="search_date"
+              />
+            </div>
+          </div>
+          
+        <!-- Floating Button Starts -->
+        <div class="btn-container" style="display: flex">
+          <button class="search-btn btn1" onclick="handleSearch()">
+            <img src="./images/Search.svg" alt="search" /> Search
+          </button>
+          <button class="clearAll-btn btn1" onclick="handleClearAll()" style="width: 116px;">
+            <img src="./images/ClearAll.svg" alt="clear-all" /> Clear All
+          </button>
+        </div>
+        <!-- Floating Button Ends-->
+      </aside>
+      <!-- Left Section Ends -->
+
+      <!-- Right Section Starts -->
+      <section>
+        <button onclick="openFilter()" class="filter-btn">
+          <img src="./images/Filter.svg" alt="filter" />
+          FITLER
+        </button>
+
+        <div
+          class="quick-filter-container"
+          style="display: flex; background-color: #F2F4F5; justify-content: flex-end; gap: 2rem"
+        >
+
+        <!-- ------------------------- ADD ladder button start ------------------------- -->
+           <button
+              class="quickFilter-btn btn1"
+              id="addLadder"
+              onclick="openDialog('add-new-ladder-modal')">
+              <img src="./images/Add.svg" alt="filter" />
+              Add New Ladder
+           </button>
+
+           <!-- ------------------------ Add Ladder Button End ------------------------ -->
+
+           <!-- ----------------------- Add Kicker Button start ----------------------- -->
+           <button
+              class="quickFilter-btn btn1"
+              id="addKicker"
+              onclick="openDialog('add-new-kicker-modal')">
+              <img src="./images/Add.svg" alt="filter" />
+              Add New Kicker
+           </button>
+
+            <!-- ----------------------- Add Kicker Button end ----------------------- -->
+
+            <!-- ------------------------- Add Ei button start ------------------------- -->
+           <button
+              class="quickFilter-btn btn1"
+              id="addEi"
+              onclick="openDialog('add-new-ei-modal')">
+              <img src="./images/Add.svg" alt="filter" />
+              Add New Ei
+           </button>
+
+            <!-- ------------------------- Add Ei button end ------------------------- -->
+
+          <button
+            class="quickFilter-btn btn1"
+            onclick="openDialog('add-new-lead-modal')">
+            <img src="./images/Add.svg" alt="filter" />
+            Add New Project
+          </button>
+
+          
+        </div>
+
+
+        <div class="ladderclass" id="ladder_div" style="display: block;">
+          <div class="ladderHeader">
+            <span>Ladders</span>
+              
+          </div>
+
+          <div class="ladderCards" id="ladderCards"></div>
+
+        </div>
+        <div class="kickerclass" id="kicker_div" style="display: none;">
+          <div class="kickerHeader">
+              <span>Kickers</span>
+              
+          </div>
+
+          <div class="kickerCards" id="kickerCards"></div>
+
+          </div>
+
+        </div>
+        <div class="eiclass" id="ei_div" style="display: none;">
+          <div class="eiHeader">
+              <span>Executive Incentive</span>
+             
+          </div>
+
+          <div class="eiCards" id="eiCards"></div>
+        </div>
+
+
+
+        
+      </section>
+      <!-- Right Section Starts -->
+    </main>
+    <!-- Main Section Starts -->
+
+
+    <!-- ------------------------ Add New Ladder Modal ------------------------- -->
+    <dialog id="add-new-ladder-modal" style="display: none">
+      <div class="add-nlead-modal">
+        <!-- Heading  -->
+        <div class="heading">
+          <span>Add New Ladder</span>
+          <img
+            class="close-btn"
+            style="cursor: pointer"
+            src="./images/Close.svg"
+            alt="close"
+            onclick="closeDialog('add-new-ladder-modal')"
+          />
+        </div>
+
+        <!-- Details Accordion -->
+        
+        <!-- Details Items Container -->
+        <div class="details-container" style="display: block">
+          <!-- Details Items  -->
+          <div class="details-item">
+            <div>
+              <span class="float-span">Select Location</span>
+              <select
+                class="search_source selectpicker"
+                id="search_source"
+                data-att="search"
+                data-value="homeLocation"
+                data-live-search="true"
+                data-actions-box="true"
+                title="Search Here..."
+              >
+                <option>Option A</option>
+              </select>
+            </div>
+            <div>
+              <span class="float-span">Select Developer</span>
+              <select
+                class="search_source selectpicker"
+                id="search_source"
+                data-att="search"
+                data-value="locationIntent"
+                data-live-search="true"
+                data-actions-box="true"
+                title="Search Here..."
+              >
+                <option>Option A</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="details-item">
+            <div style="height: 38px">
+              <span class="float-span">Select Ladder Start Date</span>
+              <input
+                placeholder="Enter Here"
+                name="ladderStartDate"
+                id="ladderStartDate"
+                type="date"
+                data-att="input"
+                data-value="name"
+              />
+            </div>
+            <div style="height: 38px">
+              <span class="float-span">Select Ladder End Date</span>
+              <input
+                placeholder="Enter Here"
+                name="ladderEndDate"
+                id="ladderEndDate"
+                type="date"
+                data-att="input"
+                data-value="name"
+               />
+            </div>
+          </div>
+
+          <!-- ---------------------- Adding the Ladder Stages ----------------------- -->
+          <div class="dealRows" id="dealRow">
+           <div class="details-item" id="ladderDeals" style="flex-direction: row;">
+            <div style="height: 38px">
+              <span class="float-span">Min Unit</span>
+              <input
+                placeholder="Enter Min Unit"
+                id="stage1_min_unit"
+                type="text"
+                data-att="input"
+                data-value="name"
+               />
+            </div>
+            <div style="height: 38px">
+              <span class="float-span">Max Unit</span>
+              <input
+                placeholder="Enter Max Unit"
+                id="stage1_max_unit"
+                type="text"
+                data-att="input"
+                data-value="name"
+               />
+            </div>
+            <div style="height: 38px">
+              <span class="float-span">Percent</span>
+              <input
+                placeholder="Percent"
+                id="stage1_percent"
+                type="text"
+                data-att="input"
+                data-value="name"
+               / style="width: 100%;">
+            </div>
+
+            <div style="height: 38px;">
+              <button
+              class="quickFilter-btn btn1"
+              id="addLadderStage"
+              >
+              <img src="./images/Add.svg" alt="filter" />
+              </button>
+            </div>
+            </div>
+          </div>
+
+          <div class="details-item">
+            <div style="height: 48px; width: 123px;">
+              <span class="float-span">Creative</span>
+              <input
+                placeholder="Upload creative"
+                id="ladderCreative"
+                type="file"
+                data-att="input"
+                data-value="name"
+               / style="width: 240px;">
+            </div>
+          </div>
+
+        </div>
+
+  
+        <div style="text-align: center; width: 100%; margin: auto;">
+          <button class="dialog-btn" onclick="handleModalDataSubmit()">
+            Submit
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- ---------------------- add new ladder modal end ----------------------- -->
+
+    <!-- ------------------------ add new kicker modal ------------------------- -->
+
+    <dialog id="add-new-kicker-modal" style="display: none;">
+      <div class="add-nlead-modal">
+        <div class="heading">
+          <span>Add New Kicker</span>
+          <img
+            class="close-btn"
+            style="cursor: pointer"
+            src="./images/Close.svg"
+            alt="close"
+            onclick="closeDialog('add-new-kicker-modal')"
+          />
+        </div>
+          <div class="details-container" style="display: block">
+            <!-- Details Items  -->
+            <div class="details-item">
+              <div>
+                <span class="float-span">Select Location</span>
+                <select
+                  class="search_source selectpicker"
+                  id="search_source"
+                  data-att="search"
+                  data-value="homeLocation"
+                  data-live-search="true"
+                  data-actions-box="true"
+                  title="Search Here..."
+                >
+                  <option>Option A</option>
+                </select>
+              </div>
+              <div>
+                <span class="float-span">Select Developer</span>
+                <select
+                  class="search_source selectpicker"
+                  id="search_source"
+                  data-att="search"
+                  data-value="locationIntent"
+                  data-live-search="true"
+                  data-actions-box="true"
+                  title="Search Here..."
+                >
+                  <option>Option A</option>
+                </select>
+              </div>
+            </div>
+  
+            <div class="details-item">
+              <div style="height: 38px">
+                <span class="float-span">Select Kicker Start Date</span>
+                <input
+                  placeholder="Enter Here"
+                  name="kickerStartDate"
+                  id="kickerStartDate"
+                  type="date"
+                  data-att="input"
+                  data-value="name"
+                />
+              </div>
+              <div style="height: 38px">
+                <span class="float-span">Select Kicker End Date</span>
+                <input
+                  placeholder="Enter Here"
+                  name="kickerEndDate"
+                  id="kickerEndDate"
+                  type="date"
+                  data-att="input"
+                  data-value="name"
+                 />
+              </div>
+            </div>
+  
+            <!-- ---------------------- Adding the Kicker Stages ----------------------- -->
+            <div class="dealRows" id="dealRow">
+             <div class="details-item" id="ladderDeals" style="flex-direction: row;">
+              <div style="height: 38px">
+                <span class="float-span">Target Amount</span>
+                <input
+                  placeholder="Enter Target Amount"
+                  id="kickerTargetAmount"
+                  type="text"
+                  data-att="input"
+                  data-value="name"
+                 />
+              </div>
+              <div style="height: 38px">
+                <span class="float-span">Target Unit</span>
+                <input
+                  placeholder="Enter Target Unit"
+                  id="kickerTargetUnit"
+                  type="text"
+                  data-att="input"
+                  data-value="name"
+                 />
+              </div>
+              <div style="height: 38px">
+                <span class="float-span">Completion Percentage</span>
+                <input
+                  placeholder="Completion Percent"
+                  id="kickerTargetPercent"
+                  type="text"
+                  data-att="input"
+                  data-value="name"
+                 / style="width: 100%;">
+              </div>
+  
+              </div>
+            </div>
+  
+            <div class="details-item">
+              <div style="height: 48px; width: 123px;">
+                <span class="float-span">Kicker Creative</span>
+                <input
+                  placeholder="Upload creative"
+                  id="kickerCreative"
+                  type="file"
+                  data-att="input"
+                  data-value="name"
+                 / style="width: 240px;">
+              </div>
+            </div>
+  
+          </div>
+
+          <div style="text-align: center">
+            <button class="dialog-btn" onclick="handleModalDataSubmit()">
+              Submit
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </dialog>
+
+    <!-- ---------------------- add new kicker modal ends ---------------------- -->
+
+
+    <!-- ----------------------- add new Ei modal start ------------------------ -->
+
+    <dialog id="add-new-ei-modal" style="display: none;">
+      <div class="add-nlead-modal">
+        <div class="heading">
+          <span>Add New Executive Incentive</span>
+          <img
+            class="close-btn"
+            style="cursor: pointer"
+            src="./images/Close.svg"
+            alt="close"
+            onclick="closeDialog('add-new-ei-modal')"
+          />
+        </div>
+          <div class="details-container" style="display: block">
+            <!-- Details Items  -->
+            <div class="details-item">
+              <div>
+                <span class="float-span">Select Location</span>
+                <select
+                  class="search_source selectpicker"
+                  id="search_source"
+                  data-att="search"
+                  data-value="homeLocation"
+                  data-live-search="true"
+                  data-actions-box="true"
+                  title="Search Here..."
+                >
+                  <option>Option A</option>
+                </select>
+              </div>
+              <div>
+                <span class="float-span">Select Developer</span>
+                <select
+                  class="search_source selectpicker"
+                  id="search_source"
+                  data-att="search"
+                  data-value="locationIntent"
+                  data-live-search="true"
+                  data-actions-box="true"
+                  title="Search Here..."
+                >
+                  <option>Option A</option>
+                </select>
+              </div>
+            </div>
+  
+            <div class="details-item">
+              <div style="height: 38px">
+                <span class="float-span">Select EI Start Date</span>
+                <input
+                  placeholder="Enter Here"
+                  name="eiStartDate"
+                  id="eiStartDate"
+                  type="date"
+                  data-att="input"
+                  data-value="name"
+                />
+              </div>
+              <div style="height: 38px">
+                <span class="float-span">Select EI End Date</span>
+                <input
+                  placeholder="Enter Here"
+                  name="eiEndDate"
+                  id="eiEndDate"
+                  type="date"
+                  data-att="input"
+                  data-value="name"
+                 />
+              </div>
+            </div>
+  
+            <!-- ---------------------- Adding the Kicker Stages ----------------------- -->
+            <div class="dealRows" id="dealRow">
+             <div class="details-item" id="ladderDeals" style="flex-direction: row;">
+              <div style="height: 38px">
+                <span class="float-span">Target Amount</span>
+                <input
+                  placeholder="Enter Target Amount"
+                  id="eiTargetAmount"
+                  type="text"
+                  data-att="input"
+                  data-value="name"
+                 />
+              </div>
+              <div style="height: 38px">
+                <span class="float-span">Target Unit</span>
+                <input
+                  placeholder="Enter Target Unit"
+                  id="eiTargetUnit"
+                  type="text"
+                  data-att="input"
+                  data-value="name"
+                 />
+              </div>
+              <div style="height: 38px">
+                <span class="float-span">Completion Percentage</span>
+                <input
+                  placeholder="Completion Percent"
+                  id="eiTargetPercent"
+                  type="text"
+                  data-att="input"
+                  data-value="name"
+                 / style="width: 100%;">
+              </div>
+  
+              </div>
+            </div>
+  
+            <div class="details-item">
+              <div style="height: 48px; width: 123px;">
+                <span class="float-span">EI Creative</span>
+                <input
+                  placeholder="Upload creative"
+                  id="eiCreative"
+                  type="file"
+                  data-att="input"
+                  data-value="name"
+                 / style="width: 240px;">
+              </div>
+            </div>
+  
+          </div>
+
+        </div>
+        <div style="text-align: center">
+          <button class="dialog-btn" onclick="handleModalDataSubmit()">
+            Submit
+          </button>
+        </div>
+      </div>
+
+      
+    </dialog>
+
+    <!-- ------------------------ add new ei modal end ------------------------- -->
+
+
+    <!-- --------------------- add new project modal start --------------------- -->
+    <dialog id="add-new-lead-modal" style="display: none;">
+      <div class="add-nlead-modal">
+        <!-- Heading  -->
+        <div class="heading">
+          <span>Add New Project</span>
+          <img
+            class="close-btn"
+            style="cursor: pointer"
+            src="./images/Close.svg"
+            alt="close"
+            onclick="closeDialog('add-new-lead-modal')"
+          />
+        </div>
+
+        <!-- Details Accordion -->
+        
+        <!-- Details Items Container -->
+        <div class="details-container" style="display: block">
+          <!-- Details Items  -->
+          <div class="details-item">
+            <div style="height: 38px">
+              <span class="float-span">Project Name</span>
+              <input
+                placeholder="Enter  Here"
+                type="text"
+                data-att="input"
+                data-value="name"
+              />
+            </div>
+           
+          </div>
+
+          <!-- Details Items  -->
+          <div class="details-item">
+            <div>
+              <span class="float-span">Select Location</span>
+              <select
+                class="search_source selectpicker"
+                id="search_source"
+                data-att="search"
+                data-value="homeLocation"
+                data-live-search="true"
+                data-actions-box="true"
+                title="Search Here..."
+              >
+                <option>Option A</option>
+              </select>
+            </div>
+            <div>
+              <span class="float-span">Select Developer</span>
+              <select
+                class="search_source selectpicker"
+                id="search_source"
+                data-att="search"
+                data-value="locationIntent"
+                data-live-search="true"
+                data-actions-box="true"
+                title="Search Here..."
+              >
+                <option>Option A</option>
+              </select>
+            </div>
+          </div>
+          
+          
+        </div>
+        <div style="text-align: center">
+          <button class="dialog-btn" onclick="addNewProject()">
+            Submit
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+   <!-- ---------------------- add new project modal end ---------------------- -->
+   
+
+    
+
+    <!-- OTP Validation Code -->
+    
+
+    <script src="./script.js"></script>
+
+    <!-- Daterange Script -->
+    <script type="text/javascript">
+      $(function () {
+        $('input[name="datefilter"]').daterangepicker({
+          autoUpdateInput: false,
+          locale: {
+            cancelLabel: "Clear",
+          },
+          autoApply: true,
+          ranges: {
+            Today: [moment(), moment()],
+            Yesterday: [
+              moment().subtract(1, "days"),
+              moment().subtract(1, "days"),
+            ],
+            "Last 7 Days": [moment().subtract(6, "days"), moment()],
+            "Last 30 Days": [moment().subtract(29, "days"), moment()],
+            "This Month": [moment().startOf("month"), moment().endOf("month")],
+            "Last Month": [
+              moment().subtract(1, "month").startOf("month"),
+              moment().subtract(1, "month").endOf("month"),
+            ],
+          },
+        });
+
+        $('input[name="datefilter"]').on(
+          "apply.daterangepicker",
+          function (ev, picker) {
+            $(this).val(
+              picker.startDate.format("MM/DD/YYYY") +
+                " - " +
+                picker.endDate.format("MM/DD/YYYY")
+            );
+          }
+        );
+
+        $('input[name="datefilter"]').on(
+          "cancel.daterangepicker",
+          function (ev, picker) {
+            $(this).val("");
+          }
+        );
+      });
+
+
+    </script>
+
+    <!-- Bootstrap Select Script -->
+    <script>
+      $(document).ready(function () {
+        $(".selectpicker").selectpicker();
+      });
+    </script>
+
+    <!-- Script to close the table see more  -->
+    <script>
+      $(document).ready(function () {
+        function closeOtherDivs(target) {
+          $(".see-more").not(target).slideUp();
+          $(".active-see-more").removeClass("active-see-more"); // Remove active class
+          $(".nested-see-more").hide(); // Hide nested-see-more
+        }
+
+        function hideAllDivs() {
+          $(".see-more").slideUp();
+        }
+
+        $(".see-more").click(function (event) {
+          event.stopPropagation(); // Prevent div click from closing itself
+        });
+        $("td[data-label='see-more']").click(function (event) {
+          event.stopPropagation(); // Prevent click from propagating to document
+          var target = $(this).find(".see-more");
+          target.slideToggle();
+          closeOtherDivs(target);
+        });
+
+        $(document).click(function () {
+          hideAllDivs();
+        });
+      });
+    </script>
+  </body>
+</html>

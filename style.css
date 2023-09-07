@@ -1,0 +1,879 @@
+@import url("https://fonts.googleapis.com/css2?family=Kadwa:wght@700&family=Ubuntu:wght@400;500;700&display=swap");
+
+/* ----------------- CSS Reset ----------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none !important;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Ubuntu", sans-serif;
+}
+img,
+svg {
+  max-width: 100%;
+  
+}
+:root {
+  --blue: #3063e4;
+  --text-gray: #4a5157;
+  --bg-light: #f2f4f5;
+  --text: #434343;
+}
+
+body {
+  background: var(--bg-light);
+}
+
+/* ----------------- Header Starts ----------------- */
+header {
+  background-color: white;
+  border-bottom: 0.5px solid rgba(109, 125, 147, 0.2);
+  padding: 2rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+header nav {
+  gap: 5rem;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+header nav .user {
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  padding: 0.5rem 1.7rem 0.5rem 0.5rem;
+  color: var(--text-gray);
+  font-size: 1.5rem;
+}
+/* ----------------- Header Ends --------------- */
+
+/* ----------------- Main ----------------- */
+main {
+  align-items: flex-start;
+  display: flex;
+}
+
+/* ----------------- Aside ----------------- */
+main aside {
+  max-height: 77vh;
+  overflow-y: scroll;
+  margin-top: 6rem;
+  padding: 1rem 2rem 5rem 2rem;
+  max-width: 17%;
+  min-width: 22%;
+}
+
+/* ----------------- Filter Button ----------------- */
+.filter-btn {
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--blue);
+  padding: 0.5rem 1rem 0.6rem 1rem;
+  color: var(--blue);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background-color: white;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 2.3rem;
+  cursor: pointer;
+  position: absolute;
+  left: 1rem;
+}
+
+/* ----------------- Floating Btn Inside the aside (filters) ----------------- */
+.btn-container {
+  position: absolute;
+  bottom: 1rem;
+  left: 5px;
+  gap: 1.6rem;
+}
+
+/* General Btn Styling */
+.btn1 {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 1rem 1.6rem 1rem 1.3rem;
+  gap: 1rem;
+}
+.btn-container .search-btn {
+  background: var(--blue);
+}
+.btn-container .clearAll-btn {
+  background-color: black;
+}
+
+/* Filter Category ( */
+.filter-catergory {
+  cursor: pointer;
+  justify-content: space-between;
+  color: var(--text);
+  display: flex;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+.filter-items {
+  font-size: 1.4rem;
+  gap: 1rem;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+/* Special Filter Item (configuration) Starts */
+.config {
+  max-height: fit-content;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* Individual Div */
+.config div {
+  background-color: white;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(228, 231, 233, 1);
+  border-radius: 2px;
+  gap: 0.8rem;
+  color: #191c1f;
+  font-size: 1.4rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Special Filter Item (configuration) Ends */
+
+
+.filter-items input[type="checkbox"] {
+  width: 2rem;
+  height: 2rem;
+}
+.filter-items input[type="text"] {
+  border-radius: 3px;
+  background: white;
+  border: none;
+  font-size: 1.4rem;
+  outline: none;
+  padding: 0.7rem 1rem;
+  color: #77878f;
+}
+
+.filter-items input[type="date"] {
+  padding: 1rem 1rem;
+}
+
+.items {
+  border-bottom: 1px solid rgba(228, 231, 233, 1);
+  padding: 1.8rem 0 0 0;
+}
+/* Filter Styling Ends */
+
+.active-filter-items {
+  display: none;
+  position: absolute;
+  z-index: 100000;
+  background-color: white;
+  width: max-content;
+  padding: 1rem 3rem 1rem 1rem;
+  text-align: left;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(233, 233, 233, 1);
+  border-radius: 1rem;
+}
+
+.active-filter-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.active-filter-items p {
+  font-size: 1.4rem;
+  line-height: 2.5rem;
+  color: #9e9e9e;
+}
+
+.active-filter-container .item-container:hover div {
+  display: block;
+}
+/* Right Section  */
+section {
+  margin: 1rem 1rem 0 0;
+  padding: 1rem 1rem 0 1rem;
+  flex: 1;
+  background: #F2F4F5;
+}
+
+/* Quick Filter Option (Floating Options) */
+.quick-filter {
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  text-align: left;
+  background-color: white;
+  width: 19rem;
+  position: absolute;
+  right: 0;
+  top: 110%;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(233, 233, 233, 1);
+  border-radius: 5px;
+  z-index: 10000;
+}
+
+.quick-filter p {
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: #8b8b8b;
+  margin-top: 1.4rem;
+}
+
+/* Quick Filter Btn */
+section .quickFilter-btn {
+  position: relative;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background-color: white;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem 0.6rem 0.5rem;
+  margin-right: 0.8rem;
+}
+
+
+
+/*  ----------------- Add new lead dialog starts -----------------*/
+dialog {
+  border: none;
+  margin: 8rem auto 0;
+  width: 50vw;
+  border-radius: 1.5rem;
+  padding: 0 1rem 1rem 1rem;
+  align-items: center;
+  /* height: min-content; */
+}
+/* Adding background blur when the modal is opened */
+dialog::backdrop {
+  backdrop-filter: blur(0.5rem);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+dialog .dialog-btn {
+  border-radius: 5px;
+  outline: none;
+  border: unset;
+  cursor: pointer;
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 500;
+  padding: 0.6rem 2rem;
+  background-color: #3063e4;
+  /* text-transform: uppercase; */
+}
+
+.add-nlead-modal {
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  height: auto;
+}
+.add-nlead-modal .heading {
+  color: #696969;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(234, 234, 234, 1);
+  margin-bottom: 2rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: white;
+  z-index: 10000000;
+}
+
+.add-nlead-modal .section-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding-bottom: 2.4rem;
+}
+
+.add-nlead-modal .down-arrow {
+  rotate: 180deg;
+}
+
+.add-nlead-modal .section-container div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 500;
+  color: #696969;
+  font-size: 1.5rem;
+}
+
+.add-nlead-modal .details-item {
+  display: flex;
+  gap: 2rem;
+  margin: 0 1rem 2.5rem 1rem;
+}
+
+.add-nlead-modal .details-item > div {
+  border-radius: 5px;
+  position: relative;
+  flex: 1;
+}
+.add-nlead-modal .details-item input[data-att="input"],
+.add-nlead-modal .details-item input[data-att="date"] {
+  padding: 1.4rem 1rem;
+  color: #696969;
+  font-size: 1.4rem;
+  width: 100%;
+  border: 1px solid rgba(224, 224, 224, 1);
+  border-radius: 5px;
+  outline: none;
+  height: 100%;
+}
+
+dialog input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+.add-nlead-modal .details-item label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 1rem;
+  font-size: 1.4rem;
+  color: #696969;
+  margin-bottom: 0;
+}
+.add-nlead-modal .details-item .float-span {
+  position: absolute;
+  top: -13px;
+  background-color: white;
+  left: 10px;
+  margin: 0 5px;
+  padding: 0 1rem;
+  z-index: 100;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #696969;
+}
+
+/* Budget Range Starts */
+.wrapper {
+  margin: 0 1rem 2.4rem 1rem;
+  border: 1px solid rgba(224, 224, 224, 1);
+  padding: 2rem 3rem;
+  border-radius: 10px;
+}
+.wrapper p {
+  color: #696969;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+
+
+input[type="range"]::-webkit-slider-thumb {
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: #3063e4;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}
+input[type="range"]::-moz-range-thumb {
+  height: 14px;
+  width: 14px;
+  border: none;
+  border-radius: 50%;
+  background: #3063e4;
+  pointer-events: auto;
+  -moz-appearance: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}
+/* Budget Range Ends */
+/*  ----------------- Add new lead dialog Ends -----------------*/
+
+/* -------- change source modal starts ---------- */
+#change-source-dialog .input-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  /* gap: 1rem; */
+  align-items: center;
+}
+#change-source-dialog .input-container input {
+  flex: 1;
+  border: 1px solid rgba(224, 224, 224, 1);
+  border-radius: 5px;
+  font-size: 1.2rem;
+  padding: 0.7rem 1.3rem;
+}
+
+.input-container span {
+  flex: 1;
+  font-size: 1.4rem;
+  color: #696969;
+}
+/* -------- change source modal Ends ---------- */
+
+@media only screen and (max-width: 1200px) {
+  #active-filter {
+    display: none;
+  }
+  aside::-webkit-scrollbar-track {
+    margin-top: 1rem !important;
+  }
+
+  aside::-webkit-scrollbar {
+    padding: 10rem;
+    margin: 10rem;
+    visibility: hidden;
+    width: 0.5rem;
+    border-radius: 5px;
+  }
+
+  main {
+    display: block;
+  }
+
+  header {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 2rem;
+  }
+
+  header img:first-child {
+    display: block !important;
+  }
+  header img:nth-child(2) {
+    width: 13rem;
+    height: 3.5rem;
+  }
+
+  nav div {
+    display: none !important;
+  }
+
+  nav img {
+    display: block !important;
+  }
+
+  main aside {
+    background-color: #f2f4f5 !important;
+    display: none;
+    max-height: 80vh !important;
+    overflow-y: scroll;
+    margin-top: 0 !important;
+    padding-bottom: 4rem !important;
+
+    padding: 2rem !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 0 10px 0 0;
+    top: 7.5rem;
+    left: 0;
+    z-index: 500;
+    position: absolute;
+    max-width: 60% !important;
+    min-width: 60% !important;
+    background: #e7e7e7;
+    flex-direction: column;
+    min-height: 80vh !important;
+    overflow-y: scroll;
+    padding-top: 0 !important;
+  }
+  #filter-container .items {
+    padding-bottom: 0;
+    border-bottom: 1px solid #c9c9c9;
+  }
+  #filter-container .items .filter-catergory {
+    font-size: 1.4rem;
+  }
+
+  #filter-container .items .filter-items {
+    margin-bottom: 1.5rem;
+  }
+
+
+
+  /* Search & Clear All Container */
+  .btn-container {
+    background: white;
+    position: fixed;
+    width: 64%;
+    bottom: 0;
+    padding: 0.5rem;
+    left: 0;
+  }
+
+  section {
+    overflow-x: scroll;
+    overflow-y: scroll;
+    padding: 0;
+    margin: 0;
+  }
+/*   section .filter-btn {
+    display: none;
+  } */
+
+  section .quick-filter-container {
+    position: sticky;
+    z-index: 300;
+  }
+  section .quickFilter-btn {
+    margin: 0;
+    margin-left: auto;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    font-size: 1.4rem;
+  }
+
+  
+
+}
+
+/* Removing the up/down btn from input[number] */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+/* Utility Class for rotate */
+.rotate {
+  transform: rotate(180deg);
+}
+
+/* ----------------- Custom Scrollbar Styling ----------------- */
+
+/* table  Custom Scrollbar  */
+dialog::-webkit-scrollbar,
+.table-container::-webkit-scrollbar {
+  padding: 10rem;
+  margin: 10rem;
+  visibility: hidden;
+  width: 0.8rem;
+  border-radius: 5px;
+}
+
+dialog::-webkit-scrollbar-thumb,
+.table-container::-webkit-scrollbar-thumb {
+  width: 5px;
+  height: 10px;
+  border-radius: 10px;
+  background: lightgray;
+}
+
+/* Aside  Custom Scrollbar  */
+aside::-webkit-scrollbar {
+  padding: 10rem;
+  margin: 10rem;
+  visibility: hidden;
+  width: 0.8rem;
+  border-radius: 5px;
+}
+
+aside::-webkit-scrollbar-track {
+  margin-top: 2rem;
+}
+
+aside::-webkit-scrollbar-thumb {
+  width: 5px;
+  height: 10px;
+  border-radius: 10px;
+  background: lightgray;
+}
+
+/* Filter Options Custom Scrollbar */
+.filter-items::-webkit-scrollbar {
+  visibility: hidden;
+  width: 0.5rem;
+}
+.filter-items::-webkit-scrollbar-thumb {
+  width: 1px;
+  height: 10px;
+  border-radius: 10px;
+  background: lightgray;
+}
+
+/* Custom Scrollbar Inside the Bootstrap Search  */
+.inner::-webkit-scrollbar {
+  padding: 10rem;
+  margin: 10rem;
+  visibility: hidden;
+  width: 0.5rem;
+  border-radius: 5px;
+}
+
+.inner::-webkit-scrollbar-thumb {
+  width: 5px;
+  height: 10px;
+  border-radius: 10px;
+  background: lightgray;
+}
+
+
+/* ---------------------- ladder class css starts here ---------------------- */
+
+.ladderclass {
+  background-color: #ffffff;
+  overflow-y: scroll;
+  height: 84vh;
+  border-radius: 4px;
+}
+
+/* WebKit-based browsers (Chrome, Safari) */
+.ladderclass::-webkit-scrollbar {
+  width: 8px; /* Adjust the width as desired for the scrollbar */
+}
+
+.ladderclass::-webkit-scrollbar-thumb {
+  background-color: grey; /* Color of the scrollbar thumb */
+}
+
+/* Firefox */
+.ladderclass {
+  scrollbar-width: thin; /* Thin scrollbar for Firefox */
+  scrollbar-color: grey transparent; /* Color of the scrollbar thumb and track */
+}
+
+.ladderHeader{
+  display: flex;
+  margin: 0.2%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ladderHeader , button{
+  display: flex;
+  margin: 0.5%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.ladderHeader span {
+  margin: 0.5%; /* Remove any default margin */
+  order: 1; /* Specify the order for the h4 element */
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: var(--blue);
+}
+
+
+/* ---------------------- ladder class css ends here ---------------------- */
+
+
+/* ---------------------- kicker class css starts here ---------------------- */
+
+.kickerclass {
+  background-color: #ffffff;
+  overflow-y: scroll;
+  height: 84vh;
+  border-radius: 4px;
+}
+
+/* WebKit-based browsers (Chrome, Safari) */
+.kickerclass::-webkit-scrollbar {
+  width: 8px; /* Adjust the width as desired for the scrollbar */
+}
+
+.kickerclass::-webkit-scrollbar-thumb {
+  background-color: grey; /* Color of the scrollbar thumb */
+}
+
+/* Firefox */
+.kickerclass {
+  scrollbar-width: thin; /* Thin scrollbar for Firefox */
+  scrollbar-color: grey transparent; /* Color of the scrollbar thumb and track */
+}
+
+.kickerHeader{
+  display: flex;
+  margin: 1%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.kickerHeader span {
+  margin: 0; /* Remove any default margin */
+  order: 1; /* Specify the order for the h4 element */
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: var(--blue);
+}
+
+/* ----------------------- kicker class css ends here ----------------------- */
+
+/* ---------------------- ei class css starts here ---------------------- */
+.eiclass {
+  background-color: #ffffff;
+  overflow-y: scroll;
+  height: 84vh;
+  border-radius: 4px;
+
+}
+
+/* WebKit-based browsers (Chrome, Safari) */
+.eiclass::-webkit-scrollbar {
+  width: 8px; /* Adjust the width as desired for the scrollbar */
+}
+
+.eiclass::-webkit-scrollbar-thumb {
+  background-color: grey; /* Color of the scrollbar thumb */
+}
+
+/* Firefox */
+.eiclass {
+  scrollbar-width: thin; /* Thin scrollbar for Firefox */
+  scrollbar-color: grey transparent; /* Color of the scrollbar thumb and track */
+}
+
+.eiHeader{
+  display: flex;
+  margin: 1%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.eiHeader span {
+  margin: 0; /* Remove any default margin */
+  order: 1; /* Specify the order for the h4 element */
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: var(--blue);
+}
+
+
+/* ----------------------- ei class css ends here ----------------------- */
+
+
+
+/* ------------------------------ css for cards ----------------------------- */
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  width: 300px;
+  max-width: 100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card2 {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.card2 .card-header {
+  background-color: #ffffff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+}
+
+.card-content {
+  padding: 20px;
+  align-items: left;
+  text-align: left;
+}
+
+.card-content h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.card-content p {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+  align-items: left;
+  text-align: left;
+}
+
+
+
+/* ---------------------------- css for cards end --------------------------- */
+
+/* ------------------------ ladder cards division css ----------------------- */
+
+.ladderCards{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+.kickerCards{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+.eiCards{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* ---------------------- ladder cards division css end --------------------- */

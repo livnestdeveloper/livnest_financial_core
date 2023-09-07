@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  width: 300px;
+  max-width: 100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card2 {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.card2 .card-header {
+  background-color: #ffffff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+}
+
+.card-content {
+  padding: 20px;
+  align-items: left;
+  text-align: left;
+}
+
+.card-content h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.card-content p {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+  align-items: left;
+  text-align: left;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container" id="card-container">
+    <div class="card">
+        <span class="card-label">Card 1</span>
+        <hr class="card-line">
+        <div class="card-content">
+          <p>This is the first card.</p>
+        </div>
+      </div>    
+      </div>  
+</body>
+<script>
+    // Sample JSON data
+const jsonData = [
+  {
+    "ladder_id": "48",
+    "ladder_start_date": "2023-01-01",
+    "ladder_end_date": "2023-12-02",
+    "ladder_extended_date": null,
+    "Ladder_type": "Retrospective",
+    "project_id": "1",
+    "project_name": "Dosti",
+    "developer_id": "1",
+    "developer_name": "Dosti"
+  },
+  {
+    "ladder_id": "52",
+    "ladder_start_date": "2023-01-01",
+    "ladder_end_date": "2023-12-29",
+    "ladder_extended_date": "hellooooo",
+    "Ladder_type": "Introspective",
+    "project_id": "2",
+    "project_name": "Puranic aura",
+    "developer_id": "2",
+    "developer_name": "Puraniks"
+  },
+  {
+    "ladder_id": "1",
+    "ladder_start_date": "2023-07-02",
+    "ladder_end_date": "2023-07-08",
+    "ladder_extended_date": null,
+    "Ladder_type": "Retrospective",
+    "project_id": "1",
+    "project_name": "Dosti",
+    "developer_id": "1",
+    "developer_name": "Dosti"
+  }
+];
+
+// Get the card container element
+const cardContainer = document.getElementById("card-container");
+
+// Loop through the JSON data and create cards
+// Loop through the JSON data and create cards
+jsonData.forEach(data => {
+  const card = document.createElement("div");
+  card.classList.add("card");
+
+  const label = document.createElement("span");
+  label.classList.add("card-label");
+  label.textContent = data.project_name;
+
+  const content = document.createElement("div");
+  content.classList.add("card-content");
+
+  const simpleline = document.createElement("hr");
+  simpleline.className = "card-line";
+
+  const developerInfo = document.createElement("p");
+  developerInfo.innerHTML = `Developer: ${data.developer_name}`;
+
+  const dates = document.createElement("p");
+  dates.innerHTML = `Start: ${data.ladder_start_date} <br> End: ${data.ladder_end_date}`;
+
+  content.appendChild(developerInfo);
+  content.appendChild(simpleline);
+  content.appendChild(dates);
+
+  // Check if ladder_extended_date is not null
+  if (data.ladder_extended_date !== null) {
+    const extendedLabel = document.createElement("span");
+    extendedLabel.classList.add("extended-label");
+    extendedLabel.textContent = ` Extended`;
+
+    // Create a small green dot
+    const greenDot = document.createElement("span");
+    greenDot.classList.add("green-dot"); // Corrected class name
+
+    // Append the green dot to the extended label
+    extendedLabel.appendChild(greenDot);
+
+    content.appendChild(extendedLabel);
+  }
+
+  card.appendChild(label);
+  card.appendChild(content);
+
+  cardContainer.appendChild(card);
+});
+
+
+</script>
+</html>
