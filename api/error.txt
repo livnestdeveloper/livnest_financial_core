@@ -1,0 +1,63 @@
+{
+    "developerId": "2",
+    "projectId": "2",
+    "EiStartDate": "undefined-NaN-undefined",
+    "EiEndDate": "undefined-NaN-undefined",
+    "EiTargetAmount": "9000",
+    "EiTargetUnit": "1",
+    "EiTargetPercent": "0.5"
+}
+{
+    "developerId": "2",
+    "projectId": "2",
+    "EiStartDate": "undefined-NaN-undefined",
+    "EiEndDate": "undefined-NaN-undefined",
+    "EiTargetAmount": "9000",
+    "EiTargetUnit": "1",
+    "EiTargetPercent": "0.5"
+}
+{
+    "developerId": "2",
+    "projectId": "2",
+    "EiStartDate": "2023-09-13",
+    "EiEndDate": "2023-09-29",
+    "EiTargetAmount": "9000",
+    "EiTargetUnit": "1",
+    "EiTargetPercent": "0.5"
+}
+{
+    "developerId": "2",
+    "projectId": "2",
+    "EiStartDate": "2023-09-04",
+    "EiEndDate": "2023-09-28",
+    "EiTargetAmount": "9000",
+    "EiTargetUnit": "1",
+    "EiTargetPercent": "0.5"
+}
+{
+    "developerId": "2",
+    "projectId": "2",
+    "EiStartDate": "2023-09-04",
+    "EiEndDate": "2023-09-19",
+    "EiTargetAmount": "9000",
+    "EiTargetUnit": "1",
+    "EiTargetPercent": "0.5"
+}
+{
+    "developerId": "2",
+    "projectId": "2",
+    "EiStartDate": "2023-09-04",
+    "EiEndDate": "2023-09-19",
+    "EiTargetAmount": "9000",
+    "EiTargetUnit": "1",
+    "EiTargetPercent": "0.5"
+}
+{
+    "developerId": "1",
+    "projectId": "1",
+    "kickerStartDate": "2023-09-04",
+    "kickerEndDate": "2023-09-28",
+    "kickerTargetAmount": "3000",
+    "kickerTargetUnit": "2",
+    "kickerTargetPercent": "5"
+}

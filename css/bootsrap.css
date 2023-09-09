@@ -3023,7 +3023,7 @@ aside .dropdown-toggle::after {
 
 
  dialog .dropdown-toggle::after {
-  content: url('./images/Dropdown.svg');
+  content: url('../images/Dropdown.svg');
   z-index: 100000;
   /* display: inline-block; */
   /* width: 0; */

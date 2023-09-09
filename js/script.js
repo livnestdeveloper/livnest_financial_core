@@ -911,14 +911,668 @@ $('#search_project_main').on('changed.bs.select', logSelectedOptionValues);
 
 /* -------------------------- Add project function -------------------------- */
 
+// Function to populate the Location dropdown
+function populateLocationDropdown2() {
+  const locationSelect2 = document.getElementById('search_location_add_project');
+  locationSelect2.innerHTML = '<option value="">Select Location</option>';
+
+  for (const locationId in dropdownData) {
+    const option = document.createElement('option');
+    option.value = locationId;
+    option.textContent = dropdownData[locationId].location_name;
+    locationSelect2.appendChild(option);
+  }
+
+  // Refresh the selectpicker after modifying the options
+  $(locationSelect2).selectpicker('refresh');
+}
+
+// Function to populate the Developer dropdown based on the selected Location
+function populateDeveloperDropdown2() {
+  const locationSelect2 = document.getElementById('search_location_add_project');
+  const developerSelect2 = document.getElementById('search_developer_add_project');
+
+  const selectedLocationId = locationSelect2.value;
+  developerSelect2.innerHTML = '<option value="">Select Developer</option>';
+
+  if (selectedLocationId) {
+    const developers = dropdownData[selectedLocationId].developers;
+    for (const developerId in developers) {
+      const option = document.createElement('option');
+      option.value = developerId;
+      option.textContent = developers[developerId].developer_name;
+      developerSelect2.appendChild(option);
+    }
+
+    // Refresh the selectpicker after modifying the options
+    $(developerSelect2).selectpicker('refresh');
+  }
+
+  
+}
+
+
+
+// Call the function to fetch data and populate the Location dropdown initially
+fetchData()
+  .then(() => {
+    populateLocationDropdown2();
+  });
+
+function logSelectedOptionValues2() {
+  const locationSelect2 = document.getElementById('search_location_add_project');
+  const developerSelect2 = document.getElementById('search_developer_add_project');
+
+  // Get the selected values
+  const selectedLocationValue = locationSelect2.value;
+  const selectedDeveloperValue = developerSelect2.value;
+
+  //console.log('Selected Location Value:', selectedLocationValue);
+  //console.log('Selected Developer Value:', selectedDeveloperValue);
+  //console.log('Selected Project Value:', selectedProjectValue);
+}
+
+// Add event listeners to the dropdowns to log the selected option values on change
+$('#search_location_add_project').on('changed.bs.select', () => {
+  populateDeveloperDropdown2();
+  logSelectedOptionValues2();
+});
+
+$('#search_developer_add_project').on('changed.bs.select', () => {
+  logSelectedOptionValues2();
+});
 
 
 
 
-const addNewProject = () => {
 
 
+
+
+function addNewProject() {
+  const locationDropdown = document.getElementById("search_location_add_project");
+  const developerDropdown = document.getElementById("search_developer_add_project");
+  const projectNameInput = document.getElementById("add_project_name");
+
+  // Check if any of the fields are empty
+  if (
+    locationDropdown.value === "" ||
+    developerDropdown.value === "" ||
+    projectNameInput.value.trim() === ""
+  ) {
+    alert("Please fill in all the required fields.");
+  } else {
+    const addProjectHeader = new Headers();
+    addProjectHeader.append("HTTP_LOCATION_ID", locationDropdown.value);
+    addProjectHeader.append("HTTP_DEVELOPER_ID", developerDropdown.value);
+    addProjectHeader.append("HTTP_PROJECT_NAME", projectNameInput.value);
+
+    const addProjectUrl = 'http://localhost/newmaster/api/addProjectApi.php';
+    const requestAddProject = new Request(addProjectUrl, {
+      method: "GET",
+      headers: addProjectHeader,
+    });
+
+    fetch(requestAddProject)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+          })
+          .then((jsonData) => {
+            // Handle the response data here
+            console.log("Response data:", jsonData);
+            alert("Project Added")
+          })
+  }
+}
+
+
+/* ------------------------ Add project function ends ----------------------- */
+
+
+
+/* ------------------------- Add Ei Function Starts ------------------------- */
+
+
+// Function to populate the Developer dropdown initially
+function populateDeveloperDropdownEi() {
+  const developerSelectEi = document.getElementById('search_developer_ei');
+  developerSelectEi.innerHTML = '<option value="">Select Developer</option>';
+
+  for (const locationId in dropdownData) {
+    const developers = dropdownData[locationId].developers;
+    for (const developerId in developers) {
+      const option = document.createElement('option');
+      option.value = developerId;
+      option.textContent = developers[developerId].developer_name;
+      developerSelectEi.appendChild(option);
+    }
+  }
+
+  // Refresh the selectpicker after modifying the options
+  $(developerSelectEi).selectpicker('refresh');
+}
+
+// Function to populate the Project dropdown based on the selected Developer
+function populateProjectDropdownEi() {
+  const developerSelectEi = document.getElementById('search_developer_ei');
+  const projectSelectEi = document.getElementById('search_project_ei');
+
+  const selectedDeveloperId = developerSelectEi.value;
+  projectSelectEi.innerHTML = '<option value="">Select Project</option>';
+
+  if (selectedDeveloperId) {
+    for (const locationId in dropdownData) {
+      const developers = dropdownData[locationId].developers;
+      if (developers[selectedDeveloperId]) {
+        const projects = developers[selectedDeveloperId].projects;
+        for (const project of projects) {
+          const option = document.createElement('option');
+          option.value = project.project_id;
+          option.textContent = project.project_name;
+          projectSelectEi.appendChild(option);
+        }
+        break; // No need to continue searching for locations
+      }
+    }
+
+    // Refresh the selectpicker after modifying the options
+    $(projectSelectEi).selectpicker('refresh');
+  }
+}
+
+function logSelectedOptionValuesEi() {
+  const developerSelectEi = document.getElementById('search_developer_ei');
+  const projectSelectEi = document.getElementById('search_project_ei');
+
+  // Get the selected values
+  const selectedDeveloperValue = developerSelectEi.value;
+  const selectedProjectValue = projectSelectEi.value;
+
+  //console.log('Selected Developer Value:', selectedDeveloperValue);
+  //console.log('Selected Project Value:', selectedProjectValue);
+}
+
+// Call the function to fetch data and populate the Developer dropdown initially
+fetchData()
+  .then(() => {
+    populateDeveloperDropdownEi();
+  });
+
+// Add an event listener to the Developer dropdown to populate the Project dropdown
+$('#search_developer_ei').on('changed.bs.select', () => {
+  populateProjectDropdownEi();
+  logSelectedOptionValuesEi();
+});
+
+
+
+function convertToDate(dateString) {
+  const [month, day, year] = dateString.split('/').map(Number);
+  return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
+
+
+//Define all the feilds
+const EiDeveloperSelect = document.getElementById("search_developer_ei");
+const EiProjectSelect = document.getElementById("search_project_ei");
+const EiStartDate = document.getElementById("eiStartDate");
+const EiEndDate = document.getElementById("eiEndDate");
+const EiTargetAmount = document.getElementById("eiTargetAmount");
+const EiTargetUnit = document.getElementById("eiTargetUnit");
+const EiTargetPercent = document.getElementById("eiTargetPercent");
+const EiCreativeFile = document.getElementById("eiCreative");
+
+
+function addEiFunction(){
+   // Check if any of the fields are empty
+   if (
+    EiDeveloperSelect.value === "" ||
+    EiProjectSelect.value === "" ||
+    EiStartDate.value === "" || EiEndDate.value === "" ||
+    EiTargetAmount.value === "" ||
+    EiTargetUnit.value === "" || EiTargetPercent.value === "" ||
+    EiCreativeFile.value === ""
+  ) {
+    alert("Please fill in all the required fields.");
+  } else {
+     //alert("Executive Incentive Added");
+
+    const addEiHeaders = new Headers();
+    addEiHeaders.append("HTTP_DEVELOPER_ID", EiDeveloperSelect.value);
+    addEiHeaders.append("HTTP_PROJECT_ID", EiProjectSelect.value);
+    addEiHeaders.append("HTTP_START_DATE", EiStartDate.value);
+    addEiHeaders.append("HTTP_END_DATE", EiEndDate.value);
+    addEiHeaders.append("HTTP_TARGET_AMOUNT", EiTargetAmount.value);
+    addEiHeaders.append("HTTP_TARGET_UNIT", EiTargetUnit.value);
+    addEiHeaders.append("HTTP_TARGET_PERCENT", EiTargetPercent.value);
+    
+
+    const addEiUrl = 'http://localhost/newmaster/api/addEiApi.php';
+     // Create a request object with the headers
+     const requestEi = new Request(addEiUrl, {
+       method: "GET",
+       headers: addEiHeaders,
+     });
+
+     fetch(requestEi)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+          })
+          .then((jsonData) => {
+            // Handle the response data here
+            console.log("Response data:", jsonData);
+            alert("Ei Added")
+          })
+
+        const fileInputKicker = document.getElementById('eiCreative');
+        const selectedFileKicker = fileInputKicker.files[0];
+        if (selectedFileKicker) {
+          const formData = new FormData();
+          formData.append('file', selectedFileKicker);
+          formData.append('file_type', 'EiCreative');
+          formData.append('creative_start_date', EiStartDate.value);
+          formData.append('creative_end_date', EiEndDate.value);
+          formData.append('project_id' , EiProjectSelect.value);
+          formData.append('developer_id' , EiDeveloperSelect.value);
+
+                    
+
+    
+          fetch('http://localhost/newmaster/api/upload.php', {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              console.log(data);
+              alert('File uploaded successfully!');
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('File upload failed.');
+          });
+          }
+
+  }
+}
+
+
+
+/* ------------------------- Add Ei Function Starts ------------------------- */
+
+
+
+/* ----------------------- Add Kicker Function Starts ----------------------- */
+
+
+// Function to populate the Developer dropdown initially
+function populateDeveloperDropdownKicker() {
+  const developerSelectKicker = document.getElementById('search_developer_kicker');
+  developerSelectKicker.innerHTML = '<option value="">Select Developer</option>';
+
+  for (const locationId in dropdownData) {
+    const developers = dropdownData[locationId].developers;
+    for (const developerId in developers) {
+      const option = document.createElement('option');
+      option.value = developerId;
+      option.textContent = developers[developerId].developer_name;
+      developerSelectKicker.appendChild(option);
+    }
+  }
+
+  // Refresh the selectpicker after modifying the options
+  $(developerSelectKicker).selectpicker('refresh');
+}
+
+// Function to populate the Project dropdown based on the selected Developer
+function populateProjectDropdownKicker() {
+  const developerSelectKicker = document.getElementById('search_developer_kicker');
+  const projectSelectKicker = document.getElementById('search_project_kicker');
+
+  const selectedDeveloperId = developerSelectKicker.value;
+  projectSelectKicker.innerHTML = '<option value="">Select Project</option>';
+
+  if (selectedDeveloperId) {
+    for (const locationId in dropdownData) {
+      const developers = dropdownData[locationId].developers;
+      if (developers[selectedDeveloperId]) {
+        const projects = developers[selectedDeveloperId].projects;
+        for (const project of projects) {
+          const option = document.createElement('option');
+          option.value = project.project_id;
+          option.textContent = project.project_name;
+          projectSelectKicker.appendChild(option);
+        }
+        break; // No need to continue searching for locations
+      }
+    }
+
+    // Refresh the selectpicker after modifying the options
+    $(projectSelectKicker).selectpicker('refresh');
+  }
+}
+
+function logSelectedOptionValuesKicker() {
+  const developerSelectKicker = document.getElementById('search_developer_kicker');
+  const projectSelectKicker = document.getElementById('search_project_kicker');
+
+  // Get the selected values
+  const selectedDeveloperValue = developerSelectKicker.value;
+  const selectedProjectValue = projectSelectKicker.value;
+
+  //console.log('Selected Developer Value:', selectedDeveloperValue);
+  //console.log('Selected Project Value:', selectedProjectValue);
+}
+
+// Call the function to fetch data and populate the Developer dropdown initially
+fetchData()
+  .then(() => {
+    populateDeveloperDropdownKicker();
+  });
+
+// Add an event listener to the Developer dropdown to populate the Project dropdown
+$('#search_developer_kicker').on('changed.bs.select', () => {
+  populateProjectDropdownKicker();
+  logSelectedOptionValuesKicker();
+});
+
+//Define all the feilds
+const kickerDeveloperSelect = document.getElementById("search_developer_kicker");
+const kickerProjectSelect = document.getElementById("search_project_kicker");
+const kickerStartDate = document.getElementById("kickerStartDate");
+const kickerEndDate = document.getElementById("kickerEndDate");
+const kickerTargetAmount = document.getElementById("kickerTargetAmount");
+const kickerTargetUnit = document.getElementById("kickerTargetUnit");
+const kickerTargetPercent = document.getElementById("kickerTargetPercent");
+const kickerCreativeFile = document.getElementById("kickerCreative");
+
+
+//function to add kicker
+
+function addKickerFunction(){
+
+  // Check if any of the fields are empty
+  if (
+    kickerDeveloperSelect.value === "" ||
+     kickerProjectSelect.value === "" ||
+     kickerStartDate.value === "" || kickerEndDate.value === "" ||
+     kickerTargetAmount.value === "" ||
+     kickerTargetUnit.value === "" || kickerTargetPercent.value === "" ||
+     kickerCreativeFile.value === ""
+  ) {
+    alert("Please fill in all the required fields.");
+  } else{
+    const addkickerHeaders = new Headers();
+    addkickerHeaders.append("HTTP_DEVELOPER_ID", kickerDeveloperSelect.value);
+    addkickerHeaders.append("HTTP_PROJECT_ID", kickerProjectSelect.value);
+    addkickerHeaders.append("HTTP_START_DATE", kickerStartDate.value);
+    addkickerHeaders.append("HTTP_END_DATE", kickerEndDate.value);
+    addkickerHeaders.append("HTTP_TARGET_AMOUNT", kickerTargetAmount.value);
+    addkickerHeaders.append("HTTP_TARGET_UNIT", kickerTargetUnit.value);
+    addkickerHeaders.append("HTTP_TARGET_PERCENT", kickerTargetPercent.value);
+    
+
+    const addKickerUrl = 'http://localhost/newmaster/api/addKickerApi.php';
+     // Create a request object with the headers
+     const requestkicker = new Request(addKickerUrl, {
+       method: "GET",
+       headers: addkickerHeaders,
+     });
+
+     fetch(requestkicker)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+          })
+          .then((jsonData) => {
+            // Handle the response data here
+            console.log("Response data:", jsonData);
+            alert("Kicker Added")
+          })
+
+        const fileInputKicker = document.getElementById('kickerCreative');
+        const selectedFileKicker = fileInputKicker.files[0];
+        if (selectedFileKicker) {
+          const formData = new FormData();
+          formData.append('file', selectedFileKicker);
+          formData.append('file_type', 'kickerCreative');
+          formData.append('creative_start_date', kickerStartDate.value);
+          formData.append('creative_end_date', kickerEndDate.value);
+          formData.append('project_id' , kickerProjectSelect.value);
+          formData.append('developer_id' , kickerDeveloperSelect.value);
+
+                    
+
+    
+          fetch('http://localhost/newmaster/api/upload.php', {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              console.log(data);
+              alert('File uploaded successfully!');
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('File upload failed.');
+          });
+          }
+  }
 
 }
 
-/* ------------------------ Add project function ends ----------------------- */
+/* ------------------------ Add Kicker Function Ends ------------------------ */
+
+
+/* ----------------------- Add Ladder Function Starts ----------------------- */
+
+// Function to populate the Developer dropdown initially
+function populateDeveloperDropdownLadder() {
+  const developerSelectLadder = document.getElementById('search_developer_ladder');
+  developerSelectLadder.innerHTML = '<option value="">Select Developer</option>';
+
+  for (const locationId in dropdownData) {
+    const developers = dropdownData[locationId].developers;
+    for (const developerId in developers) {
+      const option = document.createElement('option');
+      option.value = developerId;
+      option.textContent = developers[developerId].developer_name;
+      developerSelectLadder.appendChild(option);
+    }
+  }
+
+  // Refresh the selectpicker after modifying the options
+  $(developerSelectLadder).selectpicker('refresh');
+}
+
+// Function to populate the Project dropdown based on the selected Developer
+function populateProjectDropdownLadder() {
+  const developerSelectLadder = document.getElementById('search_developer_ladder');
+  const projectSelectLadder = document.getElementById('search_project_ladder');
+
+  const selectedDeveloperId = developerSelectLadder.value;
+  projectSelectLadder.innerHTML = '<option value="">Select Project</option>';
+
+  if (selectedDeveloperId) {
+    for (const locationId in dropdownData) {
+      const developers = dropdownData[locationId].developers;
+      if (developers[selectedDeveloperId]) {
+        const projects = developers[selectedDeveloperId].projects;
+        for (const project of projects) {
+          const option = document.createElement('option');
+          option.value = project.project_id;
+          option.textContent = project.project_name;
+          projectSelectLadder.appendChild(option);
+        }
+        break; // No need to continue searching for locations
+      }
+    }
+
+    // Refresh the selectpicker after modifying the options
+    $(projectSelectLadder).selectpicker('refresh');
+  }
+}
+
+function logSelectedOptionValuesLadder() {
+  const developerSelectLadder = document.getElementById('search_developer_ladder');
+  const projectSelectLadder = document.getElementById('search_project_ladder');
+
+  // Get the selected values
+  const selectedDeveloperValue = developerSelectLadder.value;
+  const selectedProjectValue = projectSelectLadder.value;
+
+  //console.log('Selected Developer Value:', selectedDeveloperValue);
+  //console.log('Selected Project Value:', selectedProjectValue);
+}
+
+// Call the function to fetch data and populate the Developer dropdown initially
+fetchData()
+  .then(() => {
+    populateDeveloperDropdownLadder();
+  });
+
+// Add an event listener to the Developer dropdown to populate the Project dropdown
+$('#search_developer_ladder').on('changed.bs.select', () => {
+  populateProjectDropdownLadder();
+  logSelectedOptionValuesLadder();
+});
+
+function addLadderFunction(){
+
+  //Define all the feilds
+  const ladderDeveloperSelect = document.getElementById("search_developer_ladder");
+  const ladderProjectSelect = document.getElementById("search_project_ladder");
+  const ladderStartDate = document.getElementById("ladderStartDate");
+  const ladderEndDate = document.getElementById("ladderEndDate");
+  const ladderType = document.getElementById("ladder_type");
+
+  // Check if any of the fields are empty
+  if (
+    ladderDeveloperSelect.value === "" ||
+    ladderProjectSelect.value === "" ||
+    ladderStartDate.value === "" || ladderEndDate.value === "" ||
+    ladderType.value === "" 
+  ) {
+    alert("Please fill in all the required fields.");
+  }
+   else{
+   // Select input elements with specific IDs
+   const minUnitInputs = document.querySelectorAll('input[id^="stage"][id$="_min_unit"]');
+   const maxUnitInputs = document.querySelectorAll('input[id^="stage"][id$="_max_unit"]');
+   const percentInputs = document.querySelectorAll('input[id^="stage"][id$="_percent"]');
+ 
+   // Create an object to store the input values
+   const jsonObject = {};
+ 
+   // Iterate through the input elements
+   minUnitInputs.forEach(function (minUnitInput, index) {
+     // Extract the stage number from the input IDs
+     const stageNumber = minUnitInput.id.split("_")[0].replace("stage", "");
+ 
+     // Get the corresponding maxUnit and percent inputs
+     const maxUnitInput = maxUnitInputs[index];
+     const percentInput = percentInputs[index];
+ 
+     // Create an object for each input field with stage number and value
+     const inputValueObject = {
+       min_unit: minUnitInput.value,
+       max_unit: maxUnitInput.value,
+       percent: percentInput.value,
+     };
+ 
+     // Add the inputValueObject to jsonObject with the stage key
+     jsonObject[`stage_${stageNumber}`] = inputValueObject;
+   });
+ 
+   // Print the JSON object to the console
+   console.log(JSON.stringify(jsonObject, null, 2));
+
+   const ladderData = JSON.stringify(jsonObject, null, 2);
+   //console.log("Ladder Data" , ladderData);
+
+
+   
+
+
+
+   const addLadderHeaders = new Headers();
+   addLadderHeaders.append("HTTP_DEVELOPER_ID", ladderDeveloperSelect.value);
+   addLadderHeaders.append("HTTP_PROJECT_ID", ladderProjectSelect.value);
+   addLadderHeaders.append("HTTP_START_DATE", ladderStartDate.value);
+   addLadderHeaders.append("HTTP_END_DATE", ladderEndDate.value);
+   addLadderHeaders.append("HTTP_LADDER_TYPE" , ladderType.value);
+
+
+   const apiUrlLadder = "http://localhost/newmaster/api/addLadderApi.php";
+
+   // Define headers if needed
+   const headers = {
+     "Content-Type": "application/json",
+   };
+   
+   // Create the fetch request
+   fetch(apiUrlLadder, {
+     method: "POST", // Use POST method to send data
+     headers: addLadderHeaders, // Include headers if needed
+     body: ladderData, // Send the JSON data in the request body
+   })
+     .then((response) => response.json())
+     .then((data) => {
+       // Handle the API response here
+       console.log(data);
+     })
+     .catch((error) => {
+       // Handle any errors that occur during the fetch request
+       console.error("Error:", error);
+     });
+
+
+     const fileInputLadder = document.getElementById('ladderCreative');
+        const selectedFileLadder = fileInputLadder.files[0];
+        if (selectedFileLadder) {
+          const formData = new FormData();
+          formData.append('file', selectedFileLadder);
+          formData.append('file_type', 'ladderCreative');
+          formData.append('creative_start_date', ladderStartDate.value);
+          formData.append('creative_end_date', ladderEndDate.value);
+          formData.append('project_id' , ladderProjectSelect.value);
+          formData.append('developer_id' , ladderDeveloperSelect.value);
+
+                    
+
+    
+          fetch('http://localhost/newmaster/api/upload.php', {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              console.log(data);
+              alert('File uploaded successfully!');
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('File upload failed.');
+          });
+          }
+        }
+}
+
+
+
+/* ------------------------ Add Ladder Function Ends ------------------------ */
+
+
+
+/* ---------------------------- Display EI Modal ---------------------------- */
+
+
+
+/* -------------------------- Display Ei Modal End -------------------------- */
