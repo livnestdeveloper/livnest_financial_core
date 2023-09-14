@@ -18,6 +18,12 @@ const handleToggle = (i) => {
 
 
 
+function formatDateHuman(inputDate) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = new Date(inputDate).toLocaleDateString(undefined, options);
+  return formattedDate;
+}
+
 const addLadderButton = document.getElementById("addLadder");
 const addKickerButton = document.getElementById("addKicker");
 const addEiButton = document.getElementById("addEi");
@@ -208,6 +214,30 @@ fetch(request)
         content.appendChild(extendedLabel);
       }
 
+      const LadderDisplayData = [];
+
+      // Create an object and push it into the array
+      const LadderdataObject = {
+        Project_name: data.project_name,
+        Ladder_extended_date: data.ladder_extended_date,
+        Ladder_end_date: data.ladder_end_date,
+        Ladder_start_date: data.ladder_start_date,
+        Ladder_project_id: data.project_id,
+        Ladder_developer_id: data.developer_id,
+        Ladder_type: data.Ladder_type
+      };
+      
+      LadderDisplayData.push(LadderdataObject);
+
+
+      // Add an onclick function to the card
+      card.addEventListener("click", function () {
+        // Handle the click event for the card here
+        //alert(`You clicked on ${data.project_name}`);
+        openDialog('show-ladder-modal');
+        logLadderDisplayData(LadderDisplayData);
+      });
+
       card.appendChild(label);
       card.appendChild(content);
 
@@ -273,6 +303,32 @@ fetch(request2)
         content.appendChild(extendedLabel);
       }
 
+      const kickerDisplayData = [];
+
+        // Create an object and push it into the array
+        const kickerdataObject = {
+          Project_name: data.project_name,
+          Developer_name: data.developer_name,
+          kicker_extended_date: data.kicker_extended_date,
+          kicker_percent: data.kicker_in_percent,
+          kicker_target_amount: data.kicker_target_in_amount,
+          kicker_target_unit: data.kicker_target_in_unit,
+          kicker_tenure_end_date: data.kicker_end_date,
+          kicker_tenure_start_date: data.kicker_start_date,
+          project_id: data.project_id,
+          developer_id: data.developer_id
+        };
+        
+        kickerDisplayData.push(kickerdataObject);
+
+        // Add an onclick function to the card
+        card.addEventListener("click", function () {
+          // Handle the click event for the card here
+          //alert(`You clicked on ${data.project_name}`);
+          openDialog('show-kicker-modal');
+          logKickerDisplayData(kickerDisplayData);
+        });
+
       card.appendChild(label);
       card.appendChild(content);
 
@@ -320,7 +376,7 @@ fetch(request3)
     content.appendChild(dates);
 
     // Check if ladder_extended_date is not null
-    if (data.ladder_extended_date !== null) {
+    if (data.kicker_extended_date !== null) {
       const extendedLabel = document.createElement("span");
       extendedLabel.classList.add("extended-label");
       extendedLabel.textContent = "Extended";
@@ -334,6 +390,33 @@ fetch(request3)
 
       content.appendChild(extendedLabel);
     }
+
+    const EiDisplayData = [];
+
+        // Create an object and push it into the array
+        const EidataObject = {
+          Project_name: data.project_name,
+          Developer_name: data.developer_name,
+          Ei_extended_date: data.ei_extended_date,
+          Ei_percent: data.ei_percent,
+          Ei_target_amount: data.ei_target_amount,
+          Ei_target_unit: data.ei_target_unit,
+          Ei_tenure_end_date: data.ei_tenure_end_date,
+          Ei_tenure_start_date: data.ei_tenure_start_date,
+          project_id: data.project_id,
+          developer_id: data.developer_id
+        };
+        
+        EiDisplayData.push(EidataObject);
+
+
+        // Add an onclick function to the card
+        card.addEventListener("click", function () {
+          // Handle the click event for the card here
+          //alert(`You clicked on ${data.project_name}`);
+          openDialog('show-ei-modal');
+          logEiDisplayData(EiDisplayData);
+        });
 
     card.appendChild(label);
     card.appendChild(content);
@@ -618,6 +701,7 @@ fetch("http://localhost/newmaster/api/ladder.php")
   .then(jsonData => {
     // Loop through the fetched JSON data and create cards
     jsonData.forEach(data => {
+      //console.log(data);
       const card = document.createElement("div");
       card.classList.add("card");
 
@@ -635,7 +719,7 @@ fetch("http://localhost/newmaster/api/ladder.php")
       developerInfo.innerHTML = `Developer: ${data.developer_name}`;
 
       const dates = document.createElement("p");
-      dates.innerHTML = `Start: ${data.ladder_start_date} <br> End: ${data.ladder_end_date}`;
+      dates.innerHTML = `Start: ${formatDateHuman(data.ladder_start_date)} <br> End: ${formatDateHuman(data.ladder_end_date)}`;
 
       content.appendChild(developerInfo);
       content.appendChild(simpleline);
@@ -656,6 +740,30 @@ fetch("http://localhost/newmaster/api/ladder.php")
 
         content.appendChild(extendedLabel);
       }
+
+      const LadderDisplayData = [];
+
+        // Create an object and push it into the array
+        const LadderdataObject = {
+          Project_name: data.project_name,
+          Ladder_extended_date: data.ladder_extended_date,
+          Ladder_end_date: data.ladder_end_date,
+          Ladder_start_date: data.ladder_start_date,
+          Ladder_project_id: data.project_id,
+          Ladder_developer_id: data.developer_id,
+          Ladder_type: data.Ladder_type
+        };
+        
+        LadderDisplayData.push(LadderdataObject);
+
+
+        // Add an onclick function to the card
+        card.addEventListener("click", function () {
+          // Handle the click event for the card here
+          //alert(`You clicked on ${data.project_name}`);
+          openDialog('show-ladder-modal');
+          logLadderDisplayData(LadderDisplayData);
+        });
 
       card.appendChild(label);
       card.appendChild(content);
@@ -680,6 +788,7 @@ fetch("http://localhost/newmaster/api/kicker.php")
   .then(jsonData => {
     // Loop through the fetched JSON data and create cards
     jsonData.forEach(data => {
+      //console.log(data);
       const card = document.createElement("div");
       card.classList.add("card");
 
@@ -697,14 +806,14 @@ fetch("http://localhost/newmaster/api/kicker.php")
       developerInfo.innerHTML = `Developer: ${data.developer_name}`;
 
       const dates = document.createElement("p");
-      dates.innerHTML = `Start: ${data.kicker_start_date} <br> End: ${data.kicker_end_date}`;
+      dates.innerHTML = `Start: ${formatDateHuman(data.kicker_start_date)} <br> End: ${formatDateHuman(data.kicker_end_date)}`;
 
       content.appendChild(developerInfo);
       content.appendChild(simpleline);
       content.appendChild(dates);
 
       // Check if ladder_extended_date is not null
-      if (data.ladder_extended_date !== null) {
+      if (data.kicker_extended_date !== null) {
         const extendedLabel = document.createElement("span");
         extendedLabel.classList.add("extended-label");
         extendedLabel.textContent = "Extended";
@@ -718,6 +827,35 @@ fetch("http://localhost/newmaster/api/kicker.php")
 
         content.appendChild(extendedLabel);
       }
+
+      const kickerDisplayData = [];
+
+        // Create an object and push it into the array
+        const kickerdataObject = {
+          Project_name: data.project_name,
+          Developer_name: data.developer_name,
+          kicker_extended_date: data.kicker_extended_date,
+          kicker_percent: data.kicker_in_percent,
+          kicker_target_amount: data.kicker_target_in_amount,
+          kicker_target_unit: data.kicker_target_in_unit,
+          kicker_tenure_end_date: data.kicker_end_date,
+          kicker_tenure_start_date: data.kicker_start_date,
+          project_id: data.project_id,
+          developer_id: data.developer_id
+        };
+
+       // console.log(data.kicker_extended_date);
+        
+        kickerDisplayData.push(kickerdataObject);
+
+        // Add an onclick function to the card
+        card.addEventListener("click", function () {
+          // Handle the click event for the card here
+          //alert(`You clicked on ${data.project_name}`);
+          openDialog('show-kicker-modal');
+          logKickerDisplayData(kickerDisplayData);
+        });
+
 
       card.appendChild(label);
       card.appendChild(content);
@@ -736,61 +874,95 @@ const eicardContainer = document.getElementById("eiCards");
 // Fetch data from the API endpoint
 document.addEventListener("DOMContentLoaded", function () {
 
-fetch("http://localhost/newmaster/api/ei.php")
-  .then(response => response.json())
-  .then(jsonData => {
-    // Loop through the fetched JSON data and create cards
-    jsonData.forEach(data => {
-      const card = document.createElement("div");
-      card.classList.add("card");
+  fetch("http://localhost/newmaster/api/ei.php")
+    .then(response => response.json())
+    .then(jsonData => {
+      // Loop through the fetched JSON data and create cards
+      jsonData.forEach(data => {
+        //console.log(data);
+        const card = document.createElement("div");
+        card.classList.add("card");
 
-      const label = document.createElement("span");
-      label.classList.add("card-label");
-      label.textContent = data.project_name;
+        const label = document.createElement("span");
+        label.classList.add("card-label");
+        label.textContent = data.project_name;
 
-      const content = document.createElement("div");
-      content.classList.add("card-content");
+        const content = document.createElement("div");
+        content.classList.add("card-content");
 
-      const simpleline = document.createElement("hr");
-      simpleline.className = "card-line";
+        const simpleline = document.createElement("hr");
+        simpleline.className = "card-line";
 
-      const developerInfo = document.createElement("p");
-      developerInfo.innerHTML = `Developer: ${data.developer_name}`;
+        const developerInfo = document.createElement("p");
+        developerInfo.innerHTML = `Developer: ${data.developer_name}`;
 
-      const dates = document.createElement("p");
-      dates.innerHTML = `Start: ${data.ei_tenure_start_date} <br> End: ${data.ei_tenure_end_date}`;
+        const dates = document.createElement("p");
+        dates.innerHTML = `Start: ${formatDateHuman(data.ei_tenure_start_date)} <br> End: ${formatDateHuman(data.ei_tenure_end_date)}`;
 
-      content.appendChild(developerInfo);
-      content.appendChild(simpleline);
-      content.appendChild(dates);
+        content.appendChild(developerInfo);
+        content.appendChild(simpleline);
+        content.appendChild(dates);
 
-      // Check if ladder_extended_date is not null
-      if (data.ladder_extended_date !== null) {
-        const extendedLabel = document.createElement("span");
-        extendedLabel.classList.add("extended-label");
-        extendedLabel.textContent = "Extended";
 
-        // Create a small green dot
-        const greenDot = document.createElement("span");
-        greenDot.classList.add("green-dot");
+        //eiExtendedDateDisplay.value = ""; // Set to an initial or default value
 
-        // Append the green dot to the extended label
-        extendedLabel.appendChild(greenDot);
 
-        content.appendChild(extendedLabel);
-      }
+        // Check if ladder_extended_date is not null
+        if (data.ei_extended_date != "0000-00-00") {
+          const extendedLabel = document.createElement("span");
+          extendedLabel.classList.add("extended-label");
+          extendedLabel.textContent = "Extended";
+          // Create a small green dot
+          const greenDot = document.createElement("span");
+          greenDot.classList.add("green-dot");
 
-      card.appendChild(label);
-      card.appendChild(content);
+          // Append the green dot to the extended label
+          extendedLabel.appendChild(greenDot);
+          content.appendChild(extendedLabel);
+        }
+      
 
-      eicardContainer.appendChild(card);
+
+
+        const EiDisplayData = [];
+
+        // Create an object and push it into the array
+        const EidataObject = {
+          Project_name: data.project_name,
+          Developer_name: data.developer_name,
+          Ei_extended_date: data.ei_extended_date,
+          Ei_percent: data.ei_percent,
+          Ei_target_amount: data.ei_target_amount,
+          Ei_target_unit: data.ei_target_unit,
+          Ei_tenure_end_date: data.ei_tenure_end_date,
+          Ei_tenure_start_date: data.ei_tenure_start_date,
+          project_id: data.project_id,
+          developer_id: data.developer_id
+        };
+        
+        EiDisplayData.push(EidataObject);
+
+
+        // Add an onclick function to the card
+        card.addEventListener("click", function () {
+          // Handle the click event for the card here
+          //alert(`You clicked on ${data.project_name}`);
+          openDialog('show-ei-modal');
+          logEiDisplayData(EiDisplayData);
+        });
+
+        card.appendChild(label);
+        card.appendChild(content);
+
+        eicardContainer.appendChild(card);
+      });
+    })
+    .catch(error => {
+      console.error("Error fetching data:", error);
     });
-  })
-  .catch(error => {
-    console.error("Error fetching data:", error);
-  });
 
 });
+
 
 
 
@@ -1203,7 +1375,7 @@ function addEiFunction(){
 
 
 
-/* ------------------------- Add Ei Function Starts ------------------------- */
+/* ------------------------- Add Ei Function ends ------------------------- */
 
 
 
@@ -1562,7 +1734,7 @@ function addLadderFunction(){
               alert('File upload failed.');
           });
           }
-        }
+      }
 }
 
 
@@ -1573,6 +1745,679 @@ function addLadderFunction(){
 
 /* ---------------------------- Display EI Modal ---------------------------- */
 
+function formatDateHuman(inputDate) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = new Date(inputDate).toLocaleDateString(undefined, options);
+  return formattedDate;
+}
 
+
+
+const toggleSwitch = document.getElementById("EitoggleSwitch");
+const statusText = document.getElementById("eistatusText");
+const eiExtendedDiv = document.getElementById("eiExtendedDiv");
+
+// Initial state
+eiExtendedDiv.style.display = toggleSwitch.checked ? "flex" : "none";
+
+// Initial state
+statusText.textContent = toggleSwitch.checked ? "Extended" : "Not Extended";
+
+// Update text when the switch changes
+toggleSwitch.addEventListener("change", function() {
+  statusText.textContent = toggleSwitch.checked ? "Extended" : "Not Extended";
+  eiExtendedDiv.style.display = toggleSwitch.checked ? "flex" : "none";
+});
+
+function logEiDisplayData(dataArray) {
+  // Loop through the array and log each object's properties
+  dataArray.forEach(dataObject => {
+
+    const showEiProjectName = document.getElementById("showEiProjectName");
+    const EiDeveloperName = document.getElementById("EiDeveloperName");
+    const eiDisplayStartDate = document.getElementById("eiDisplayStartDate");
+    const eiDisplayEndDate = document.getElementById("eiDisplayEndDate");
+    const eiDisplayTargetAmount = document.getElementById("eiDisplayTargetAmount");
+    const eiDisplayTargetUnit = document.getElementById("eiDisplayTargetUnit");
+    const eiDisplayTargetPercent = document.getElementById("eiDisplayTargetPercent");
+
+    showEiProjectName.innerHTML = dataObject.Project_name;
+    EiDeveloperName.innerHTML = dataObject.Developer_name
+    eiDisplayStartDate.value = formatDateHuman(dataObject.Ei_tenure_start_date);
+    eiDisplayEndDate.value = formatDateHuman(dataObject.Ei_tenure_end_date);
+    eiDisplayTargetAmount.value = dataObject.Ei_target_amount;
+    eiDisplayTargetUnit.value = dataObject.Ei_target_unit;
+    eiDisplayTargetPercent.value = dataObject.Ei_percent;
+
+    const showEiCreativeButton = document.getElementById("eiCreativeView");
+    const eiCreativeUrl = `http://localhost/files/download.php?creative_start_date=${dataObject.Ei_tenure_start_date}&creative_end_date=${dataObject.Ei_tenure_end_date}&file_type=EiCreative&project_id=${dataObject.project_id}&developer_id=${dataObject.developer_id}`;
+    showEiCreativeButton.setAttribute("href", eiCreativeUrl);
+    //console.log("ei url" , eiCreativeUrl);
+
+    const eiHiddenProjectId = document.getElementById("eiHiddenProjectId");
+    const eiHiddenDeveloperId = document.getElementById("eiHiddenDeveloperId");
+    const eiHiddenStartDate = document.getElementById("eiHiddenStartDate");
+    const eiHiddenEndDate = document.getElementById("eiHiddenEndDate");
+ 
+    eiHiddenProjectId.value = dataObject.project_id
+    eiHiddenDeveloperId.value = dataObject.developer_id
+    eiHiddenStartDate.value = dataObject.Ei_tenure_start_date
+    eiHiddenEndDate.value = dataObject.Ei_tenure_end_date
+
+    const showExtendedCreativeButton = document.getElementById("eiExtendedCreativeView");
+    const eiExtendedCreativeUrl = `http://localhost/files/download.php?creative_start_date=${dataObject.Ei_tenure_start_date}&creative_end_date=${dataObject.Ei_tenure_end_date}&file_type=EiExtendedCreative&project_id=${dataObject.project_id}&developer_id=${dataObject.developer_id}`;
+    showExtendedCreativeButton.setAttribute("href", eiExtendedCreativeUrl); 
+    
+    const eiExtendedDateDisplay = document.getElementById("eiExtendedDate");
+    eiExtendedDateDisplay.value = dataObject.Ei_extended_date;
+
+  });
+}
 
 /* -------------------------- Display Ei Modal End -------------------------- */
+
+
+/* ----------------------- Display kicker modal start ----------------------- */
+
+
+
+const toggleSwitchKicker = document.getElementById("kickertoggleSwitch");
+const eistatusText = document.getElementById("eistatusText");
+const kickerExtendedDiv = document.getElementById("kickerExtendedDiv");
+
+// Initial state
+kickerExtendedDiv.style.display = toggleSwitchKicker.checked ? "flex" : "none";
+
+// Initial state
+eistatusText.textContent = toggleSwitchKicker.checked ? "Extended" : "Not Extended";
+
+// Update text when the switch changes
+toggleSwitchKicker.addEventListener("change", function() {
+  eistatusText.textContent = toggleSwitchKicker.checked ? "Extended" : "Not Extended";
+  kickerExtendedDiv.style.display = toggleSwitchKicker.checked ? "flex" : "none";
+});
+
+
+function logKickerDisplayData(dataArray) {
+  // Loop through the array and log each object's properties
+  dataArray.forEach(dataObject => {
+    
+    const showkickerProjectName = document.getElementById("showKickerProjectName");
+    const kickerDeveloperName = document.getElementById("kickerDeveloperName");
+    const kickerDisplayStartDate = document.getElementById("kickerDisplayStartDate");
+    const kickerDisplayEndDate = document.getElementById("kickerDisplayEndDate");
+    const kickerDisplayTargetAmount = document.getElementById("kickerDisplayTargetAmount");
+    const kickerDisplayTargetUnit = document.getElementById("kickerDisplayTargetUnit");
+    const kickerDisplayTargetPercent = document.getElementById("kickerDisplayTargetPercent");
+
+    showkickerProjectName.innerHTML = dataObject.Project_name;
+    kickerDeveloperName.innerHTML = dataObject.Developer_name
+    kickerDisplayStartDate.value = formatDateHuman(dataObject.kicker_tenure_start_date);
+    kickerDisplayEndDate.value = formatDateHuman(dataObject.kicker_tenure_end_date);
+    kickerDisplayTargetAmount.value = dataObject.kicker_target_amount;
+    kickerDisplayTargetUnit.value = dataObject.kicker_target_unit;
+    kickerDisplayTargetPercent.value = dataObject.kicker_percent;
+
+    const showKickerCreativeButton = document.getElementById("kickerCreativeView");
+    const kickerCreativeUrl = `http://localhost/files/download.php?creative_start_date=${dataObject.kicker_tenure_start_date}&creative_end_date=${dataObject.kicker_tenure_end_date}&file_type=kickerCreative&project_id=${dataObject.project_id}&developer_id=${dataObject.developer_id}`;
+    showKickerCreativeButton.setAttribute("href", kickerCreativeUrl);
+    console.log("kicker url" , kickerCreativeUrl);
+
+    const kickerHiddenProjectId = document.getElementById("kickerHiddenProjectId");
+    const kickerHiddenDeveloperId = document.getElementById("kickerHiddenDeveloperId");
+    const kickerHiddenStartDate = document.getElementById("kickerHiddenStartDate");
+    const kickerHiddenEndDate = document.getElementById("kickerHiddenEndDate");
+    
+    kickerHiddenProjectId.value = dataObject.project_id
+    kickerHiddenDeveloperId.value = dataObject.developer_id
+    kickerHiddenStartDate.value = dataObject.kicker_tenure_start_date
+    kickerHiddenEndDate.value = dataObject.kicker_tenure_end_date
+
+    const showKickerExtendedCreativeButton = document.getElementById("kickerExtendedCreative");
+    const kickerExtendedCreativeUrl = `http://localhost/files/download.php?creative_start_date=${dataObject.kicker_tenure_start_date}&creative_end_date=${dataObject.kicker_tenure_end_date}&file_type=kickerExtendedCreative&project_id=${dataObject.project_id}&developer_id=${dataObject.developer_id}`;
+    showKickerExtendedCreativeButton.setAttribute("href", kickerExtendedCreativeUrl); 
+    
+    
+
+    const kickerExtendedDateDisplay = document.getElementById("kickerExtendedDate");
+    kickerExtendedDateDisplay.value = dataObject.kicker_extended_date;
+
+  });
+}
+
+/* ------------------------ Display kicker modal end ------------------------ */
+
+
+/* -------------------------- Display Ladder modal -------------------------- */
+
+
+const toggleSwitchLadder = document.getElementById("laddertoggleSwitch");
+const ladderStatusText = document.getElementById("ladderstatusText");
+const ladderExtendedDiv = document.getElementById("ladderExtendedDiv");
+
+
+// Initial state
+ladderExtendedDiv.style.display = toggleSwitchLadder.checked ? "flex" : "none";
+
+// Initial state
+ladderStatusText.textContent = toggleSwitchLadder.checked ? "Extended" : "Not Extended";
+
+// Update text when the switch changes
+toggleSwitchLadder.addEventListener("change", function() {
+  ladderStatusText.textContent = toggleSwitchLadder.checked ? "Extended" : "Not Extended";
+  ladderExtendedDiv.style.display = toggleSwitchLadder.checked ? "flex" : "none";
+});
+
+
+
+function logLadderDisplayData(dataArray) {
+  dataArray.forEach((dataObject) => {
+    //console.log(dataObject.Ladder_type);
+
+    const showladderProjectName = document.getElementById("showLadderProjectName");
+    const ladderDeveloperName = document.getElementById("ladderDeveloperName");
+    const ladderDisplayStartDate = document.getElementById("ladderDisplayStartDate");
+    const ladderDisplayEndDate = document.getElementById("ladderDisplayEndDate");
+    const ladderTypeOption = document.getElementById("ladder_type_fetched");
+
+    ladderDisplayStartDate.value = formatDateHuman(dataObject.Ladder_start_date);
+    ladderDisplayEndDate.value = formatDateHuman(dataObject.Ladder_end_date);
+    showladderProjectName.innerHTML = dataObject.Project_name;
+    //ladderDeveloperName.innerHTML = dataObject.Developer_name
+    ladderTypeOption.value = dataObject.Ladder_type;
+    ladderTypeOption.title = dataObject.Ladder_type;
+
+    const ladderHiddenProjectId = document.getElementById("ladderHiddenProjectId");
+    const ladderHiddenDeveloperId = document.getElementById("ladderHiddenDeveloperId");
+    const ladderHiddenStartDate = document.getElementById("ladderHiddenStartDate");
+    const ladderHiddenEndDate = document.getElementById("ladderHiddenEndDate");
+    
+    ladderHiddenProjectId.value = dataObject.Ladder_project_id
+    ladderHiddenDeveloperId.value = dataObject.Ladder_developer_id
+    ladderHiddenStartDate.value = dataObject.Ladder_start_date
+    ladderHiddenEndDate.value = dataObject.Ladder_end_date
+
+
+    const displayLadderHeaders = new Headers();
+    displayLadderHeaders.append("HTTP_DEVELOPER_ID", dataObject.Ladder_developer_id);
+    displayLadderHeaders.append("HTTP_PROJECT_ID", dataObject.Ladder_project_id);
+    displayLadderHeaders.append("HTTP_START_DATE", dataObject.Ladder_start_date);
+    displayLadderHeaders.append("HTTP_END_DATE", dataObject.Ladder_end_date);
+
+    const fetchLadderUrl = 'http://localhost/newmaster/api/fetchLadder.php';
+
+    // Create a request object with the headers
+    const requestLadder = new Request(fetchLadderUrl, {
+      method: "GET",
+      headers: displayLadderHeaders,
+    });
+
+
+    fetch(requestLadder)
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        // Parse the response as JSON
+        return response.json();
+    })
+    .then((jsonData) => {
+        // Handle the response data here
+        //console.log("Response Ladder Fetch Data:", jsonData);
+
+
+
+        const tableBody = document.getElementById('table_body');
+        tableBody.innerHTML = ''; // Clear existing rows
+
+        jsonData.forEach((dataObject, index) => {
+            const { ladder_stage_start, ladder_stage_end, stage_percent } = dataObject;
+
+            const row = document.createElement('tr');
+            
+            // Create input cells
+            const minUnitCell = createInputCell('min_unit', index, ladder_stage_start);
+            const maxUnitCell = createInputCell('max_unit', index, ladder_stage_end);
+            const percentageCell = createInputCell('percentage', index, stage_percent);
+
+            row.appendChild(minUnitCell);
+            row.appendChild(maxUnitCell);
+            row.appendChild(percentageCell);
+
+            tableBody.appendChild(row);
+        });
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+    });
+
+    function createInputCell(fieldName, index, value) {
+        const cell = document.createElement('td');
+        const input = document.createElement('input');
+        input.style.outline = "none";
+        input.style.maxWidth = "140px";
+        input.style.height = "40px"
+        input.style.border = "none";
+        input.style.textAlign = "center";
+        
+        input.type = 'text';
+        input.id = `${fieldName}_stage_${index + 1}`;
+        input.value = value;
+    
+        cell.appendChild(input);
+        return cell;
+    }
+
+    const showLadderCreativeButton = document.getElementById("ladderCreativeView");
+    const ladderCreativeUrl = `http://localhost/files/download.php?creative_start_date=${dataObject.Ladder_start_date}&creative_end_date=${dataObject.Ladder_end_date}&file_type=ladderCreative&project_id=${dataObject.Ladder_project_id}&developer_id=${dataObject.Ladder_developer_id}`;
+    showLadderCreativeButton.setAttribute("href", ladderCreativeUrl); 
+
+    const showExtendedLadderCreativeButton = document.getElementById("ladderExtendedCreativeView");
+    const ExtendedladderCreativeUrl = `http://localhost/files/download.php?creative_start_date=${dataObject.Ladder_start_date}&creative_end_date=${dataObject.Ladder_end_date}&file_type=ladderExtendedCreative&project_id=${dataObject.Ladder_project_id}&developer_id=${dataObject.Ladder_developer_id}`;
+    showExtendedLadderCreativeButton.setAttribute("href", ExtendedladderCreativeUrl); 
+
+  });
+
+       
+}
+
+
+/* ------------------------ Display Ladder modal end ------------------------ */
+
+
+
+/* ------------------------ Update Ei function start ------------------------ */
+
+function updateEiFunction(){
+  const extendedEiDate = document.getElementById("eiExtendedDate");
+  const extendedEiCreative = document.getElementById("eiExtendedCreative");
+
+
+
+
+  const eiHiddenProjectIdValue = document.getElementById("eiHiddenProjectId").value;
+  const eiHiddenDeveloperIdValue = document.getElementById("eiHiddenDeveloperId").value;
+  const eiHiddenStartDateValue = document.getElementById("eiHiddenStartDate").value;
+  const eiHiddenEndDateValue = document.getElementById("eiHiddenEndDate").value;
+  const eiDisplayedTargetAmount = document.getElementById("eiDisplayTargetAmount").value; 
+  const eiDisplayedTargetUnit = document.getElementById("eiDisplayTargetUnit").value; 
+  const eiDisplayedTargetPercent = document.getElementById("eiDisplayTargetPercent").value; 
+  const eiDisplayedExtendedDate = extendedEiDate.value;
+
+
+
+  const updateEiHeaders = new Headers();
+    updateEiHeaders.append("HTTP_DEVELOPER_ID", eiHiddenDeveloperIdValue);
+    updateEiHeaders.append("HTTP_PROJECT_ID", eiHiddenProjectIdValue);
+    updateEiHeaders.append("HTTP_START_DATE", eiHiddenStartDateValue);
+    updateEiHeaders.append("HTTP_END_DATE",eiHiddenEndDateValue);
+    updateEiHeaders.append("HTTP_TARGET_AMOUNT", eiDisplayedTargetAmount);
+    updateEiHeaders.append("HTTP_TARGET_UNIT", eiDisplayedTargetUnit);
+    updateEiHeaders.append("HTTP_TARGET_PERCENT", eiDisplayedTargetPercent);
+    if(eiDisplayedExtendedDate !== null && extendedEiCreative.value !== null){
+      updateEiHeaders.append("HTTP_EXTENDED_DATE", extendedEiDate.value);
+    }
+
+
+
+    const updateEiUrl = 'http://localhost/newmaster/api/updateEi.php';
+
+    // Create a request object with the headers
+    const requestEiUpdate = new Request(updateEiUrl, {
+      method: "GET",
+      headers: updateEiHeaders,
+    });
+
+    // Fetch data from the API using the request for ladder cards
+     fetch(requestEiUpdate)
+     .then((response) => response.json())
+     .then((jsonData) => {
+     console.log("response from Ei Update" , jsonData);
+      
+     })
+     .catch((error) => {
+       console.error("Error fetching data:", error);     
+     });
+
+
+    //Code to upload the updated UI
+
+    const updatedFileInputEi = document.getElementById('eiUpdatedCreative');
+    const selectedFileEi = updatedFileInputEi.files[0];
+    if (selectedFileEi) {
+      const formData = new FormData();
+      formData.append('file', selectedFileEi);
+      formData.append('file_type', 'EiCreative');
+      formData.append('creative_start_date', eiHiddenStartDateValue);
+      formData.append('creative_end_date', eiHiddenEndDateValue);
+      formData.append('project_id' , eiHiddenProjectIdValue);
+      formData.append('developer_id' , eiHiddenDeveloperIdValue)
+              
+
+      fetch('http://localhost/newmaster/api/updateFile.php', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          alert('File Updated successfully!');
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          alert('File upload failed.');
+        });
+      }
+
+
+      //code to Upload the Extended File
+    if(eiDisplayedExtendedDate !== null && extendedEiCreative.value !== null){
+
+    const extendedFileInputEi = document.getElementById('eiExtendedCreative');
+    const selectedFileEiExtended = extendedFileInputEi.files[0];
+    if (selectedFileEiExtended) {
+      const formData = new FormData();
+      formData.append('file', selectedFileEiExtended);
+      formData.append('file_type', 'EiExtendedCreative');
+      formData.append('creative_start_date', eiHiddenStartDateValue);
+      formData.append('creative_end_date', eiHiddenEndDateValue);
+      formData.append('project_id' , eiHiddenProjectIdValue);
+      formData.append('developer_id' , eiHiddenDeveloperIdValue)
+              
+
+      fetch('http://localhost/newmaster/api/upload.php', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          alert('ExtendedFile Updated successfully!');
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          alert('File upload failed.');
+           });
+       }
+    }
+
+      
+
+}
+
+/* ------------------------- Update Ei function Ends ------------------------ */
+
+
+/* ------------------------- Update Kicker Function ------------------------- */
+
+function updateKickerFunction (){
+  const extendedKickerDate = document.getElementById("kickerExtendedDate");
+  const extendedKickerCreative = document.getElementById("kickerExtendedCreative");
+
+
+
+
+  const kickerHiddenProjectIdValue = document.getElementById("kickerHiddenProjectId").value;
+  const kickerHiddenDeveloperIdValue = document.getElementById("kickerHiddenDeveloperId").value;
+  const kickerHiddenStartDateValue = document.getElementById("kickerHiddenStartDate").value;
+  const kickerHiddenEndDateValue = document.getElementById("kickerHiddenEndDate").value;
+  const kickerDisplayedTargetAmount = document.getElementById("kickerDisplayTargetAmount").value; 
+  const kickerDisplayedTargetUnit = document.getElementById("kickerDisplayTargetUnit").value; 
+  const kickerDisplayedTargetPercent = document.getElementById("kickerDisplayTargetPercent").value; 
+  const kickerDisplayedExtendedDate = extendedKickerDate.value;
+
+
+
+  const updateKickerHeaders = new Headers();
+    updateKickerHeaders.append("HTTP_DEVELOPER_ID",      kickerHiddenDeveloperIdValue);
+    updateKickerHeaders.append("HTTP_PROJECT_ID",        kickerHiddenProjectIdValue);
+    updateKickerHeaders.append("HTTP_START_DATE",        kickerHiddenStartDateValue);
+    updateKickerHeaders.append("HTTP_END_DATE",          kickerHiddenEndDateValue);
+    updateKickerHeaders.append("HTTP_TARGET_AMOUNT",     kickerDisplayedTargetAmount);
+    updateKickerHeaders.append("HTTP_TARGET_UNIT",       kickerDisplayedTargetUnit);
+    updateKickerHeaders.append("HTTP_TARGET_PERCENT",    kickerDisplayedTargetPercent);
+    if(kickerDisplayedExtendedDate !== null && extendedKickerCreative.value !== null){
+      updateKickerHeaders.append("HTTP_EXTENDED_DATE", extendedKickerDate.value);
+    }
+
+
+
+    const updateKickerUrl = 'http://localhost/newmaster/api/updateKicker.php';
+
+    // Create a request object with the headers
+    const requestKickerUpdate = new Request(updateKickerUrl, {
+      method: "GET",
+      headers: updateKickerHeaders,
+    });
+
+    // Fetch data from the API using the request for ladder cards
+     fetch(requestKickerUpdate)
+     .then((response) => response.json())
+     .then((jsonData) => {
+     console.log("response from Ei Update" , jsonData);
+      
+     })
+     .catch((error) => {
+       console.error("Error fetching data:", error);     
+     });
+
+
+    //Code to upload the updated UI
+
+    const updatedFileInputKicker = document.getElementById('kickerUpdatedCreative');
+    const selectedFileKicker = updatedFileInputKicker.files[0];
+    if (selectedFileKicker) {
+      const formData = new FormData();
+      formData.append('file', selectedFileKicker);
+      formData.append('file_type', 'kickerCreative');
+      formData.append('creative_start_date', kickerHiddenStartDateValue);
+      formData.append('creative_end_date', kickerHiddenEndDateValue);
+      formData.append('project_id' , kickerHiddenProjectIdValue);
+      formData.append('developer_id' , kickerHiddenDeveloperIdValue)
+              
+
+      fetch('http://localhost/newmaster/api/updateFile.php', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          alert('File Updated successfully!');
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          alert('File upload failed.');
+        });
+      }
+
+
+      //code to Upload the Extended File
+    if(kickerDisplayedExtendedDate !== null && extendedKickerCreative.value !== null){
+
+    const extendedFileInputKicker = document.getElementById('kickerExtendedCreative');
+    const selectedFileKickerExtended = extendedFileInputKicker.files[0];
+    if (selectedFileKickerExtended) {
+      const formData = new FormData();
+      formData.append('file', selectedFileKickerExtended);
+      formData.append('file_type', 'kickerExtendedCreative');
+      formData.append('creative_start_date', kickerHiddenStartDateValue);
+      formData.append('creative_end_date', kickerHiddenEndDateValue);
+      formData.append('project_id' , kickerHiddenProjectIdValue);
+      formData.append('developer_id' , kickerHiddenDeveloperIdValue)
+              
+
+      fetch('http://localhost/newmaster/api/upload.php', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          alert('ExtendedFile Updated successfully!');
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          alert('File upload failed.');
+           });
+       }
+    }
+
+      
+
+}
+
+
+/* ----------------------- Update Kicker Function Ends ---------------------- */
+
+
+/* ------------------------- Update Ladder Function ------------------------- */
+function updateLadderFunction(){
+  const ladderExtendedDate = document.getElementById("ladderExtendedDate");
+  const ladderExtendedCreative = document.getElementById("ladderExtendedCreative");
+
+  const ladderHiddenProjectIdValue = document.getElementById("ladderHiddenProjectId").value;
+  const ladderHiddenDeveloperIdValue = document.getElementById("ladderHiddenDeveloperId").value;
+  const ladderHiddenStartDateValue = document.getElementById("ladderHiddenStartDate").value;
+  const ladderHiddenEndDateValue = document.getElementById("ladderHiddenEndDate").value;
+  const ladderTypeFetched = document.getElementById("ladder_type_fetched").value;
+  const ladderExtendedDateValue = ladderExtendedDate.value;
+
+  //console.log("ladderHiddenProjectIdValue:", ladderHiddenProjectIdValue);
+  //console.log("ladderHiddenDeveloperIdValue:", ladderHiddenDeveloperIdValue);
+  //console.log("ladderHiddenStartDateValue:", ladderHiddenStartDateValue);
+  //console.log("ladderHiddenEndDateValue:", ladderHiddenEndDateValue);
+  //console.log("ladderTypeFetched:", ladderTypeFetched);
+  //console.log("ladderExtendedDateValue:", ladderExtendedDateValue);
+
+  
+
+  //GET THE TABLE DATA 
+  const tbody = document.getElementById("table_body");
+const rows = tbody.getElementsByTagName("tr");
+
+const rowData = [];
+
+for (let i = 0; i < rows.length; i++) {
+  let row = rows[i];
+
+  let minInput = row.getElementsByTagName("input")[0];
+  let minValue = minInput.value;
+
+  let maxInput = row.getElementsByTagName("input")[1];
+  let maxValue = maxInput.value;
+
+  let percentInput = row.getElementsByTagName("input")[2];
+  let percentValue = percentInput.value;
+
+  // Get the stage name based on your logic (e.g., "stage_1", "stage_2", ...)
+  let stageName = "stage_" + (i + 1);
+
+  let rowObject = {
+    stage: stageName,
+    minValue,
+    maxValue,
+    percentValue,
+  };
+
+  rowData.push(rowObject);
+}
+
+//console.log(rowData);
+
+  //GET THE TABLE DATA END
+
+
+  const updateLadderHeaders = new Headers();
+  updateLadderHeaders.append("HTTP_DEVELOPER_ID",      ladderHiddenDeveloperIdValue);
+  updateLadderHeaders.append("HTTP_PROJECT_ID",        ladderHiddenProjectIdValue);
+  updateLadderHeaders.append("HTTP_START_DATE",        ladderHiddenStartDateValue);
+  updateLadderHeaders.append("HTTP_END_DATE",          ladderHiddenEndDateValue);
+  updateLadderHeaders.append("HTTP_LADDER_TYPE",       ladderTypeFetched);
+  if(ladderExtendedDateValue !== null && ladderExtendedCreative.value !== null){
+    updateLadderHeaders.append("HTTP_EXTENDED_DATE", ladderExtendedDateValue);
+  }
+
+  const updateLadderUrl = 'http://localhost/newmaster/api/updateLadder.php';
+
+   // Create the fetch request
+   fetch(updateLadderUrl, {
+    method: "POST", // Use POST method to send data
+    headers: updateLadderHeaders, // Include headers if needed
+    body: JSON.stringify(rowData), // Send the JSON data in the request body
+  })
+  .then((response) => response.json())
+     .then((data) => {
+       // Handle the API response here
+       console.log(data);
+     })
+     .catch((error) => {
+       // Handle any errors that occur during the fetch request
+       console.error("Error:", error);
+     });
+
+
+      //Code to upload the updated UI
+
+    const updatedFileInputLadder = document.getElementById('updateLadderCreative');
+    const selectedFileladdder = updatedFileInputLadder.files[0];
+    if (selectedFileladdder) {
+      const formData = new FormData();
+      formData.append('file', selectedFileladdder);
+      formData.append('file_type', 'ladderCreative');
+      formData.append('creative_start_date', ladderHiddenStartDateValue);
+      formData.append('creative_end_date', ladderHiddenEndDateValue);
+      formData.append('project_id' , ladderHiddenProjectIdValue);
+      formData.append('developer_id' , ladderHiddenDeveloperIdValue)
+              
+
+      fetch('http://localhost/newmaster/api/updateFile.php', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          alert('File Updated successfully!');
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          alert('File upload failed.');
+        });
+      }
+
+
+      //code to Upload the Extended File
+    if(ladderExtendedDateValue !== null && ladderExtendedCreative.value !== null){
+
+    const extendedFileInputLadder = document.getElementById('ladderExtendedCreative');
+    const selectedFileLadderExtended = extendedFileInputLadder.files[0];
+    if (selectedFileLadderExtended) {
+      const formData = new FormData();
+      formData.append('file', selectedFileLadderExtended);
+      formData.append('file_type', 'ladderExtendedCreative');
+      formData.append('creative_start_date', ladderHiddenStartDateValue);
+      formData.append('creative_end_date', ladderHiddenEndDateValue);
+      formData.append('project_id' , ladderHiddenProjectIdValue);
+      formData.append('developer_id' , ladderHiddenDeveloperIdValue)
+              
+
+      fetch('http://localhost/newmaster/api/upload.php', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          alert('ExtendedFile Updated successfully!');
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          alert('File upload failed.');
+           });
+       }
+    }
+
+   
+}
+/* ----------------------- Update Ladder Function Ends ---------------------- */

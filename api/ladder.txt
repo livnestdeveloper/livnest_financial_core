@@ -23,3 +23,18 @@ Min Unit: 7
 Max Unit: 8
 Percent: 1.05
 
+Stage: stage_1
+Min Unit: 1
+Max Unit: 3
+Percent: 2
+
+Stage: stage_2
+Min Unit: 3
+Max Unit: 6
+Percent: 3
+
+Stage: stage_3
+Min Unit: 7
+Max Unit: 8
+Percent: 5
+

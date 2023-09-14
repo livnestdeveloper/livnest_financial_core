@@ -273,7 +273,7 @@ dialog {
   margin: 8rem auto 0;
   width: 50vw;
   border-radius: 1.5rem;
-  padding: 0 1rem 1rem 1rem;
+  padding: 1rem 1rem 1rem 1rem;
   align-items: center;
   /* height: min-content; */
 }
@@ -297,7 +297,7 @@ dialog .dialog-btn {
 }
 
 .add-nlead-modal {
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.25);
   border-radius: 1.5rem;
   padding: 2rem;
   height: auto;
@@ -877,3 +877,81 @@ aside::-webkit-scrollbar-thumb {
 }
 
 /* ---------------------- ladder cards division css end --------------------- */
+
+
+/* ---------------------------- toggle switch css --------------------------- */
+
+ /* Style the switch container */
+ .switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+/* Style the switch track */
+.switch input {
+  display: none;
+}
+
+/* Style the switch thumb */
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 20px;
+  transition: 0.4s;
+}
+
+/* Style the slider when it's on */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+/* Style the slider when it's checked/on */
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+/* Move the slider thumb when it's checked/on */
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+
+/* -------------------------- toggle switch css end ------------------------- */
+
+
+
+/* ------------------- Css for ladder side container table ------------------ */
+
+#sideContainer::-webkit-scrollbar
+ {
+  visibility: hidden;
+  width: 0.6rem;
+}
+
+#sideContainer::-webkit-scrollbar-track
+ {
+  margin-top: 1rem;
+}
+
+#sideContainer::-webkit-scrollbar-thumb {
+  width: 5px;
+  height: 10px;
+  border-radius: 10px;
+  background: lightgray;
+}
+
+/* ------------------- Css for ladder side container table End------------------ */

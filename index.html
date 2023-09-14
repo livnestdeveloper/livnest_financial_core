@@ -37,6 +37,7 @@
 
     <!-- Bootstrap Select CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+  
   </head>
   <body>
  
@@ -780,10 +781,461 @@
    <!-- ---------------------- add new project modal end ---------------------- -->
    
 
+   <!-- ---------------------------- Show Ei Data ----------------------------- -->
+
+
+   <dialog id="show-ei-modal" style="display: none;">
+    <div class="add-nlead-modal">
+      <div class="heading">
+        <span id="showEiProjectName"></span>
+        <img
+          class="close-btn"
+          style="cursor: pointer"
+          src="./images/Close.svg"
+          alt="close"
+          onclick="closeDialog('show-ei-modal')"
+        />
+      </div>
+        <div class="details-container" style="display: block">
+          <div class="EiDeveloperName" style="display: flex; text-align: center; justify-content: center;">
+            <span id="EiDeveloperName"></span>
+          </div><br>
+          <!-- Details Items  -->
+          <div class="details-item">
+            <div style="height: 48px">
+              <span class="float-span">Start Date</span>
+              <input
+                name="eiDisplayStartDate"
+                id="eiDisplayStartDate"
+                type="text"
+                data-att="input"
+                data-value="name"
+              / readonly>
+            </div>
+            <div style="height: 48px">
+              <span class="float-span">End Date</span>
+              <input
+                name="eiDisplayEndDate"
+                id="eiDisplayEndDate"
+                type="text"
+                data-att="input"
+                data-value="name"
+               / readonly>
+            </div>
+            <div style="height: 48px;">
+              <span class="float-span">Update Creative</span>
+              <input
+                placeholder="Upload creative"
+                id="eiUpdatedCreative"
+                type="file"
+                data-att="input"
+                data-value="name"
+               /" style="outline: none;">
+            </div>
+          </div>
+
+          <!-- ---------------------- Adding the Kicker Stages ----------------------- -->
+          <div class="dealRows" id="dealRow">
+           <div class="details-item" id="ladderDeals" style="flex-direction: row; border-bottom: 1px solid rgba(234, 234, 234, 1); margin-bottom: 4px; padding: 1rem;">
+            <div style="height: 38px">
+              <span class="float-span">Target Amount</span>
+              <input
+                id="eiDisplayTargetAmount"
+                type="text"
+                data-att="input"
+                data-value="name"
+               />
+            </div>
+            <div style="height: 38px">
+              <span class="float-span">Target Unit</span>
+              <input
+                id="eiDisplayTargetUnit"
+                type="text"
+                data-att="input"
+                data-value="name"
+               />
+            </div>
+            <div style="height: 38px">
+              <span class="float-span">Percentage</span>
+              <input
+                id="eiDisplayTargetPercent"
+                type="text"
+                data-att="input"
+                data-value="name"
+               / style="width: 100%;">
+            </div>
+
+            </div>
+
+            <div class="details-item" style="padding: 1rem; border-bottom: 1px solid rgba(234, 234, 234, 1);">
+              <div style="display: flex;">
+                <a id="eiCreativeView" href=""><button  type="button" class="btn btn-info" style="width: 120px;">View Creative</button></a>
+                <a id="eiExtendedCreativeView" href=""><button  type="button" class="btn btn-info" style="width: 170px;">View Extended Creative</button></a> 
+              </div>
+              <div style="height: 38px; display: flex; align-items: center; gap: 3px; width: 100%; margin-left: auto; justify-content: flex-end; margin-right: 5px;">
+                <p id="statusText">Not Extended</p>
+                <label class="switch" style="margin: 0;">
+                  <input type="checkbox" id="EitoggleSwitch" style="margin: 0;">
+                  <span class="slider"></span>
+                </label>
+             </div>
+            
+            </div>
+
+            <div class="eiHiddenDiv" id="eiHiddenDiv" style="display: none;">
+              <input type="text" id="eiHiddenProjectId"  style="display: none;">
+              <input type="text" id="eiHiddenDeveloperId"  style="display: none;">
+              <input type="text" id="eiHiddenStartDate"  style="display: none;">
+              <input type="text" id="eiHiddenEndDate"  style="display: none;">
+            </div>
+
+            <div class="details-item" id="eiExtendedDiv">
+              <div style="height: 48px">
+                <span class="float-span">Extended Date</span>
+                <input
+                  name="eiExtendedDate"
+                  id="eiExtendedDate"
+                  type="date"
+                  data-att="input"
+                  data-value="name"
+                 />
+              </div>
+              <div style="height: 48px;" id="extendedShowCreativeDivEi">
+                <span class="float-span" id="">Extended Creative</span>
+                <input
+                  placeholder="Upload creative"
+                  id="eiExtendedCreative"
+                  type="file"
+                  data-att="input"
+                  data-value="name"
+                 /">
+              </div>
+            </div>
+          </div>
+
+           
+
+
+        </div>
+        <div style="display: flex;text-align: center;width: 100%;margin: auto;justify-content: center;">
+          <button class="dialog-btn" onclick="updateEiFunction()">
+            Update
+          </button>
+        </div>
+      </div>
+     
+    </div>
+
+    
+  </dialog>
+
+
+   <!-- ------------------------- Show Ei Data close -------------------------- -->
     
 
-    <!-- OTP Validation Code -->
+
+   <!-- -------------------------- Show kicker data --------------------------- -->
+
+
+   <dialog id="show-kicker-modal" style="display: none;">
+    <div class="add-nlead-modal">
+      <div class="heading">
+        <span id="showKickerProjectName"></span>
+        <img
+          class="close-btn"
+          style="cursor: pointer"
+          src="./images/Close.svg"
+          alt="close"
+          onclick="closeDialog('show-kicker-modal')"
+        />
+      </div>
+        <div class="details-container" style="display: block">
+          <div class="kickerDeveloperName" style="display: flex; text-align: center; justify-content: center;">
+            <span id="kickerDeveloperName"></span>
+          </div><br>
+          <!-- Details Items  -->
+          <div class="details-item">
+            <div style="height: 38px">
+              <span class="float-span">Start Date</span>
+              <input
+                name="kickerDisplayStartDate"
+                id="kickerDisplayStartDate"
+                type="text"
+                data-att="input"
+                data-value="name"
+              / readonly>
+            </div>
+            <div style="height: 38px">
+              <span class="float-span">End Date</span>
+              <input
+                name="kickerDisplayEndDate"
+                id="kickerDisplayEndDate"
+                type="text"
+                data-att="input"
+                data-value="name"
+               / readonly>
+            </div>
+            <div style="height: 48px;">
+              <span class="float-span">Update Creative</span>
+              <input
+                placeholder="Upload creative"
+                id="kickerUpdatedCreative"
+                type="file"
+                data-att="input"
+                data-value="name"
+               /">
+            </div>
+          </div>
+
+          <!-- ---------------------- Adding the Kicker Stages ----------------------- -->
+          <div class="dealRows" id="dealRow">
+           <div class="details-item" id="ladderDeals" style="flex-direction: row; border-bottom: 1px solid rgba(234, 234, 234, 1); margin-bottom: 4px; padding: 1rem;">
+            <div style="height: 38px">
+              <span class="float-span">Target Amount</span>
+              <input
+                id="kickerDisplayTargetAmount"
+                type="text"
+                data-att="input"
+                data-value="name"
+               />
+            </div>
+            <div style="height: 38px">
+              <span class="float-span">Target Unit</span>
+              <input
+                id="kickerDisplayTargetUnit"
+                type="text"
+                data-att="input"
+                data-value="name"
+               />
+            </div>
+            <div style="height: 38px">
+              <span class="float-span">Percentage</span>
+              <input
+                id="kickerDisplayTargetPercent"
+                type="text"
+                data-att="input"
+                data-value="name"
+               / style="width: 100%;">
+            </div>
+
+            </div>
+
+            <div class="details-item" style="padding: 1rem; border-bottom: 1px solid rgba(234, 234, 234, 1);">
+              <div style="display: flex;">
+                <a id="kickerCreativeView" href=""><button  type="button" class="btn btn-info" style="width: 120px;">View Creative</button></a>
+                <a id="kickerExtendedCreativeView" href=""><button  type="button" class="btn btn-info" style="width: 190px;">View Extended Creative</button></a>
+              </div>
+              <div style="height: 38px; display: flex; align-items: center; gap: 3px; width: 100%; margin-left: auto; justify-content: flex-end; margin-right: 5px;">
+                <p id="eistatusText">Not Extended</p>
+                <label class="switch" style="margin: 0;">
+                  <input type="checkbox" id="kickertoggleSwitch" style="margin: 0;">
+                  <span class="slider"></span>
+                </label>
+             </div>
+            
+            </div>
+
+            <div class="kickerHiddenDiv" id="kickerHiddenDiv" style="display: none;">
+              <input type="text" id="kickerHiddenProjectId"  style="display: none;">
+              <input type="text" id="kickerHiddenDeveloperId"  style="display: none;">
+              <input type="text" id="kickerHiddenStartDate"  style="display: none;">
+              <input type="text" id="kickerHiddenEndDate"  style="display: none;">
+            </div>
+
+            <div class="details-item" id="kickerExtendedDiv">
+              <div style="height: 48px">
+                <span class="float-span">Extended Date</span>
+                <input
+                  name="kickerExtendedDate"
+                  id="kickerExtendedDate"
+                  type="date"
+                  data-att="input"
+                  data-value="name"
+                 />
+              </div>
+              <div style="height: 48px;">
+                <span class="float-span">Extended Creative</span>
+                <input
+                  placeholder="Upload creative"
+                  id="kickerExtendedCreative"
+                  type="file"
+                  data-att="input"
+                  data-value="name"
+                 /">
+              </div>
+            </div>
+          </div>
+
+           
+
+
+        </div>
+        <div style="display: flex;text-align: center;width: 100%;margin: auto;justify-content: center;">
+          <button class="dialog-btn" onclick="updateKickerFunction()">
+            Update
+          </button>
+        </div>
+      </div>
+     
+    </div>
+
     
+  </dialog>
+
+
+   <!-- ------------------------ Show kicker data end ------------------------- -->
+
+
+   <!-- -------------------------- Show ladder modal -------------------------- -->
+
+   <dialog id="show-ladder-modal" style="display: none;">
+    <div class="add-nlead-modal">
+      <div class="heading">
+        <span id="showLadderProjectName"></span>
+        <img
+          class="close-btn"
+          style="cursor: pointer"
+          src="./images/Close.svg"
+          alt="close"
+          onclick="closeDialog('show-ladder-modal')"
+        />
+      </div>
+        <div class="details-container" style="display: block; flex-direction: column;">
+          <div class="ladderDeveloperName" style="display: flex; text-align: center; justify-content: center;">
+            <span id="ladderDeveloperName"></span>
+          </div><br>
+          <!-- Details Items  -->
+          <div class="details-item" style="display: flex;">
+            <div class="details-item" style="display: flex; flex-direction: column;">
+            <div style="height: 30px">
+              <span class="float-span">Start Date</span>
+              <input
+                name="ladderDisplayStartDate"
+                id="ladderDisplayStartDate"
+                type="text"
+                data-att="input"
+                data-value="name"
+              / readonly>
+            </div>
+            <div style="height: 30px">
+              <span class="float-span">End Date</span>
+              <input
+                name="ladderDisplayEndDate"
+                id="ladderDisplayEndDate"
+                type="text"
+                data-att="input"
+                data-value="name"
+               / readonly>
+             </div>
+             <div style="height: 30px">
+              <span class="float-span">Creative</span>
+              <input
+                name="updateLadderCreative"
+                id="updateLadderCreative"
+                type="file"
+                data-att="input"
+                data-value="name"
+               / readonly>
+             </div>
+             <div>
+              <span class="float-span">Ladder Type</span>
+              <select
+                class="search_source selectpicker"
+                id="ladder_type_fetched"
+                data-att="search"
+                data-value="locationIntent"
+                title="Select Here..."
+              >
+              <option value="Introspective">Introspective</option>
+              <option value="Retrospective">Retrospective</option>
+              </select>
+            </div>
+          </div>
+            <div class="details-item" id="sideContainer" style="flex: 2; border-left: 2px solid #F2F4F5; padding-left: 1rem; height: 185px; overflow-y: scroll;">
+              <table border="1" cellpadding="30" cellspacing="10" style="width: 100%; border-collapse: collapse;">
+                <thead style="background-color: #F2F4F5; position: sticky; top: 0; z-index: 1;  height: 54px;" id="details">
+                  <tr>
+                        <th style="text-align: center; ">Min Unit</th>
+                        <th style="text-align: center;">Max Unit</th>
+                        <th style="text-align: center;">Percentage</th>
+                    </tr>
+                </thead>
+                <tbody id="table_body">
+                    
+                </tbody>
+            </table>
+            </div>
+          </div>
+
+          
+
+          <!-- ---------------------- Adding the Kicker Stages ----------------------- -->
+          <div class="dealRows" id="dealRow">
+         
+            <div class="details-item" style="padding: 1rem; border-bottom: 1px solid rgba(234, 234, 234, 1);">
+              <div style="display: flex;">
+                <a id="ladderCreativeView" href=""><button  type="button" class="btn btn-info" style="width: 120px;">View Creative</button></a>
+                <a id="ladderExtendedCreativeView" href=""><button  type="button" class="btn btn-info" >View Extended Creative</button></a>
+              </div>
+              <div style="height: 38px; display: flex; align-items: center; gap: 3px; width: 100%; margin-left: auto; justify-content: flex-end; margin-right: 5px;">
+                <p id="ladderstatusText">Not Extended</p>
+                <label class="switch" style="margin: 0;">
+                  <input type="checkbox" id="laddertoggleSwitch" style="margin: 0;">
+                  <span class="slider"></span>
+                </label>
+             </div>
+            
+            </div>
+
+
+            <div class="ladderHiddenDiv" id="ladderHiddenDiv" style="display: none;">
+              <input type="text" id="ladderHiddenProjectId"  style="display: none;">
+              <input type="text" id="ladderHiddenDeveloperId"  style="display: none;">
+              <input type="text" id="ladderHiddenStartDate"  style="display: none;">
+              <input type="text" id="ladderHiddenEndDate"  style="display: none;">
+            </div>
+             
+            <div class="details-item" id="ladderExtendedDiv">
+              <div style="height: 48px">
+                <span class="float-span">Extended Date</span>
+                <input
+                  name="ladderExtendedDate"
+                  id="ladderExtendedDate"
+                  type="date"
+                  data-att="input"
+                  data-value="name"
+                 />
+              </div>
+              <div style="height: 48px;">
+                <span class="float-span">Extended Creative</span>
+                <input
+                  placeholder="Upload creative"
+                  id="ladderExtendedCreative"
+                  type="file"
+                  data-att="input"
+                  data-value="name"
+                 /">
+              </div>
+            </div>
+          </div>
+
+           
+
+
+        </div>
+        <div style="display: flex;text-align: center;width: 100%;margin: auto;justify-content: center;">
+          <button class="dialog-btn" onclick="updateLadderFunction()">
+            Update
+          </button>
+        </div>
+      </div>
+     
+    </div>
+
+    
+  </dialog>
+
+   <!-- ------------------------ Show ladder modal end ------------------------ -->
 
     <script src="./js/script.js"></script>
 
@@ -869,5 +1321,6 @@
         });
       });
     </script>
+   
   </body>
 </html>

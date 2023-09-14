@@ -48,13 +48,13 @@ if (isset($headers['http_target_percent'])) {
 }
 
 // Convert the headers to a JSON string
-$headersJson = json_encode($headers, JSON_PRETTY_PRINT);
-
-// Define the file path where you want to save the headers
-$filePath = 'check2.txt';
-
-// Append the headers to the file
-file_put_contents($filePath, $headersJson . PHP_EOL, FILE_APPEND);
+//$headersJson = json_encode($headers, JSON_PRETTY_PRINT);
+//
+//// Define the file path where you want to save the headers
+//$filePath = 'check2.txt';
+//
+//// Append the headers to the file
+//file_put_contents($filePath, $headersJson . PHP_EOL, FILE_APPEND);
 
 
 // Convert all variables to an array

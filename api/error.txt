@@ -1,63 +1,180 @@
-{
-    "developerId": "2",
-    "projectId": "2",
-    "EiStartDate": "undefined-NaN-undefined",
-    "EiEndDate": "undefined-NaN-undefined",
-    "EiTargetAmount": "9000",
-    "EiTargetUnit": "1",
-    "EiTargetPercent": "0.5"
-}
-{
-    "developerId": "2",
-    "projectId": "2",
-    "EiStartDate": "undefined-NaN-undefined",
-    "EiEndDate": "undefined-NaN-undefined",
-    "EiTargetAmount": "9000",
-    "EiTargetUnit": "1",
-    "EiTargetPercent": "0.5"
-}
-{
-    "developerId": "2",
-    "projectId": "2",
-    "EiStartDate": "2023-09-13",
-    "EiEndDate": "2023-09-29",
-    "EiTargetAmount": "9000",
-    "EiTargetUnit": "1",
-    "EiTargetPercent": "0.5"
-}
-{
-    "developerId": "2",
-    "projectId": "2",
-    "EiStartDate": "2023-09-04",
-    "EiEndDate": "2023-09-28",
-    "EiTargetAmount": "9000",
-    "EiTargetUnit": "1",
-    "EiTargetPercent": "0.5"
-}
-{
-    "developerId": "2",
-    "projectId": "2",
-    "EiStartDate": "2023-09-04",
-    "EiEndDate": "2023-09-19",
-    "EiTargetAmount": "9000",
-    "EiTargetUnit": "1",
-    "EiTargetPercent": "0.5"
-}
-{
-    "developerId": "2",
-    "projectId": "2",
-    "EiStartDate": "2023-09-04",
-    "EiEndDate": "2023-09-19",
-    "EiTargetAmount": "9000",
-    "EiTargetUnit": "1",
-    "EiTargetPercent": "0.5"
-}
-{
-    "developerId": "1",
-    "projectId": "1",
-    "kickerStartDate": "2023-09-04",
-    "kickerEndDate": "2023-09-28",
-    "kickerTargetAmount": "3000",
-    "kickerTargetUnit": "2",
-    "kickerTargetPercent": "5"
-}
+UPDATE ladder 
+            SET ladder_stage_start = '1', 
+                ladder_stage_end = '3', 
+                stage_percent = '2',
+                ladder_stage = 'stage_1'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '4', 
+                ladder_stage_end = '7', 
+                stage_percent = '2.25',
+                ladder_stage = 'stage_2'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '7', 
+                ladder_stage_end = '10', 
+                stage_percent = '2.50',
+                ladder_stage = 'stage_3'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '1', 
+                ladder_stage_end = '3', 
+                stage_percent = '2',
+                ladder_stage = 'stage_1'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '4', 
+                ladder_stage_end = '7', 
+                stage_percent = '2.25',
+                ladder_stage = 'stage_2'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '7', 
+                ladder_stage_end = '10', 
+                stage_percent = '2.50',
+                ladder_stage = 'stage_3'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '1', 
+                ladder_stage_end = '3', 
+                stage_percent = '2',
+                ladder_stage = 'stage_1'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '4', 
+                ladder_stage_end = '7', 
+                stage_percent = '2.25',
+                ladder_stage = 'stage_2'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '7', 
+                ladder_stage_end = '10', 
+                stage_percent = '2.50',
+                ladder_stage = 'stage_3'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '1', 
+                ladder_stage_end = '3', 
+                stage_percent = '2',
+                ladder_stage = 'stage_1'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '4', 
+                ladder_stage_end = '7', 
+                stage_percent = '2.25',
+                ladder_stage = 'stage_2'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '7', 
+                ladder_stage_end = '9', 
+                stage_percent = '2.50',
+                ladder_stage = 'stage_3'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '1', 
+                ladder_stage_end = '3', 
+                stage_percent = '2',
+                ladder_stage = 'stage_1'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '4', 
+                ladder_stage_end = '7', 
+                stage_percent = '2.25',
+                ladder_stage = 'stage_2'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '7', 
+                ladder_stage_end = '9', 
+                stage_percent = '2.75',
+                ladder_stage = 'stage_3'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '1', 
+                ladder_stage_end = '3', 
+                stage_percent = '2',
+                ladder_stage = 'stage_1'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '4', 
+                ladder_stage_end = '7', 
+                stage_percent = '2.25',
+                ladder_stage = 'stage_2'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
+UPDATE ladder 
+            SET ladder_stage_start = '7', 
+                ladder_stage_end = '9', 
+                stage_percent = '2.75',
+                ladder_stage = 'stage_3'
+            WHERE location_id = '1' 
+              AND developer_id = '7'
+              AND project_id = '11'
+              AND ladder_start_date = '2023-09-05'
+              AND ladder_end_date = '2023-10-20'
