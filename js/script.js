@@ -175,6 +175,7 @@ fetch(request)
     cardContainer.innerHTML = '';
 
     jsonData.forEach(data => {
+      
       const card = document.createElement("div");
       card.classList.add("card");
 
@@ -689,6 +690,10 @@ document.getElementById("addLadderStage").addEventListener("click", function () 
 });
 
 
+//Add ladder Stages Multiple
+
+
+
 
 //Fetch the ladder cards
 const cardContainer = document.getElementById("ladderCards");
@@ -701,7 +706,7 @@ fetch("http://localhost/newmaster/api/ladder.php")
   .then(jsonData => {
     // Loop through the fetched JSON data and create cards
     jsonData.forEach(data => {
-      //console.log(data);
+      console.log(data);
       const card = document.createElement("div");
       card.classList.add("card");
 
@@ -743,27 +748,27 @@ fetch("http://localhost/newmaster/api/ladder.php")
 
       const LadderDisplayData = [];
 
-        // Create an object and push it into the array
-        const LadderdataObject = {
-          Project_name: data.project_name,
-          Ladder_extended_date: data.ladder_extended_date,
-          Ladder_end_date: data.ladder_end_date,
-          Ladder_start_date: data.ladder_start_date,
-          Ladder_project_id: data.project_id,
-          Ladder_developer_id: data.developer_id,
-          Ladder_type: data.Ladder_type
-        };
-        
-        LadderDisplayData.push(LadderdataObject);
+      // Create an object and push it into the array
+      const LadderdataObject = {
+        Project_name: data.project_name,
+        Ladder_extended_date: data.ladder_extended_date,
+        Ladder_end_date: data.ladder_end_date,
+        Ladder_start_date: data.ladder_start_date,
+        Ladder_project_id: data.project_id,
+        Ladder_developer_id: data.developer_id,
+        Ladder_type: data.Ladder_type
+      };
+      
+      LadderDisplayData.push(LadderdataObject);
 
 
-        // Add an onclick function to the card
-        card.addEventListener("click", function () {
-          // Handle the click event for the card here
-          //alert(`You clicked on ${data.project_name}`);
-          openDialog('show-ladder-modal');
-          logLadderDisplayData(LadderDisplayData);
-        });
+      // Add an onclick function to the card
+      card.addEventListener("click", function () {
+        // Handle the click event for the card here
+        //alert(`You clicked on ${data.project_name}`);
+        openDialog('show-ladder-modal');
+        logLadderDisplayData(LadderDisplayData);
+      });
 
       card.appendChild(label);
       card.appendChild(content);
@@ -1570,7 +1575,7 @@ function populateProjectDropdownLadder() {
   const projectSelectLadder = document.getElementById('search_project_ladder');
 
   const selectedDeveloperId = developerSelectLadder.value;
-  projectSelectLadder.innerHTML = '<option value="">Select Project</option>';
+  projectSelectLadder.innerHTML = '<option value="">Select Developer First</option>';
 
   if (selectedDeveloperId) {
     for (const locationId in dropdownData) {
@@ -1624,6 +1629,9 @@ function addLadderFunction(){
   const ladderStartDate = document.getElementById("ladderStartDate");
   const ladderEndDate = document.getElementById("ladderEndDate");
   const ladderType = document.getElementById("ladder_type");
+  const selectedProjectValues = Array.from(ladderProjectSelect.selectedOptions).map(option => option.value);
+  const projectValuesString = selectedProjectValues.join(',');
+
 
   // Check if any of the fields are empty
   if (
@@ -1676,7 +1684,7 @@ function addLadderFunction(){
 
    const addLadderHeaders = new Headers();
    addLadderHeaders.append("HTTP_DEVELOPER_ID", ladderDeveloperSelect.value);
-   addLadderHeaders.append("HTTP_PROJECT_ID", ladderProjectSelect.value);
+   addLadderHeaders.append("HTTP_PROJECT_ID", projectValuesString);   
    addLadderHeaders.append("HTTP_START_DATE", ladderStartDate.value);
    addLadderHeaders.append("HTTP_END_DATE", ladderEndDate.value);
    addLadderHeaders.append("HTTP_LADDER_TYPE" , ladderType.value);
@@ -1714,7 +1722,7 @@ function addLadderFunction(){
           formData.append('file_type', 'ladderCreative');
           formData.append('creative_start_date', ladderStartDate.value);
           formData.append('creative_end_date', ladderEndDate.value);
-          formData.append('project_id' , ladderProjectSelect.value);
+          formData.append('project_id' , projectValuesString);
           formData.append('developer_id' , ladderDeveloperSelect.value);
 
                     
@@ -1789,6 +1797,18 @@ function logEiDisplayData(dataArray) {
     eiDisplayTargetUnit.value = dataObject.Ei_target_unit;
     eiDisplayTargetPercent.value = dataObject.Ei_percent;
 
+    if(dataObject.Ei_extended_date !== "0000-00-00"){
+      document.getElementById("eiExtendedDiv").style.display = "flex";
+      document.getElementById("eiExtendedDate").value = dataObject.Ei_extended_date;
+      document.getElementById("EitoggleSwitch").checked = true;
+      document.getElementById("statusText").textContent = "Extended";
+    }else{
+      document.getElementById("eiExtendedDiv").style.display = "none";
+      document.getElementById("eiExtendedDate").value = "";
+      document.getElementById("EitoggleSwitch").checked = false;
+      document.getElementById("statusText").textContent = "Not Extended";
+    }
+
     const showEiCreativeButton = document.getElementById("eiCreativeView");
     const eiCreativeUrl = `http://localhost/files/download.php?creative_start_date=${dataObject.Ei_tenure_start_date}&creative_end_date=${dataObject.Ei_tenure_end_date}&file_type=EiCreative&project_id=${dataObject.project_id}&developer_id=${dataObject.developer_id}`;
     showEiCreativeButton.setAttribute("href", eiCreativeUrl);
@@ -1822,18 +1842,18 @@ function logEiDisplayData(dataArray) {
 
 
 const toggleSwitchKicker = document.getElementById("kickertoggleSwitch");
-const eistatusText = document.getElementById("eistatusText");
+const kickerstatusText = document.getElementById("kickerstatusText");
 const kickerExtendedDiv = document.getElementById("kickerExtendedDiv");
 
 // Initial state
 kickerExtendedDiv.style.display = toggleSwitchKicker.checked ? "flex" : "none";
 
 // Initial state
-eistatusText.textContent = toggleSwitchKicker.checked ? "Extended" : "Not Extended";
+kickerstatusText.textContent = toggleSwitchKicker.checked ? "Extended" : "Not Extended";
 
 // Update text when the switch changes
 toggleSwitchKicker.addEventListener("change", function() {
-  eistatusText.textContent = toggleSwitchKicker.checked ? "Extended" : "Not Extended";
+  kickerstatusText.textContent = toggleSwitchKicker.checked ? "Extended" : "Not Extended";
   kickerExtendedDiv.style.display = toggleSwitchKicker.checked ? "flex" : "none";
 });
 
@@ -1857,6 +1877,18 @@ function logKickerDisplayData(dataArray) {
     kickerDisplayTargetAmount.value = dataObject.kicker_target_amount;
     kickerDisplayTargetUnit.value = dataObject.kicker_target_unit;
     kickerDisplayTargetPercent.value = dataObject.kicker_percent;
+
+    if(dataObject.kicker_extended_date != "0000-00-00"){
+      document.getElementById("kickerExtendedDiv").style.display = "flex";
+      document.getElementById("kickerExtendedDate").value = dataObject.kicker_extended_date;
+      document.getElementById("kickertoggleSwitch").checked = true;
+      document.getElementById("kickerstatusText").textContent = "Extended";
+    }else{
+      document.getElementById("kickerExtendedDiv").style.display = "none";
+      document.getElementById("kickerExtendedDate").value = "";
+      document.getElementById("kickertoggleSwitch").checked = false;
+      document.getElementById("kickerstatusText").textContent = "Not Extended";
+    }
 
     const showKickerCreativeButton = document.getElementById("kickerCreativeView");
     const kickerCreativeUrl = `http://localhost/files/download.php?creative_start_date=${dataObject.kicker_tenure_start_date}&creative_end_date=${dataObject.kicker_tenure_end_date}&file_type=kickerCreative&project_id=${dataObject.project_id}&developer_id=${dataObject.developer_id}`;
@@ -1911,6 +1943,7 @@ toggleSwitchLadder.addEventListener("change", function() {
 
 
 function logLadderDisplayData(dataArray) {
+
   dataArray.forEach((dataObject) => {
     //console.log(dataObject.Ladder_type);
 
@@ -1936,6 +1969,18 @@ function logLadderDisplayData(dataArray) {
     ladderHiddenDeveloperId.value = dataObject.Ladder_developer_id
     ladderHiddenStartDate.value = dataObject.Ladder_start_date
     ladderHiddenEndDate.value = dataObject.Ladder_end_date
+
+    if(dataObject.Ladder_extended_date !== "0000-00-00"){
+      document.getElementById("ladderExtendedDiv").style.display = "flex";
+      document.getElementById("ladderExtendedDate").value = dataObject.Ladder_extended_date;
+      document.getElementById("laddertoggleSwitch").checked = true;
+      document.getElementById("ladderstatusText").textContent = "Extended";
+    }else{
+      document.getElementById("ladderExtendedDiv").style.display = "none";
+      document.getElementById("laddertoggleSwitch").checked = false;
+      document.getElementById("ladderstatusText").textContent = "Not Extended";
+      document.getElementById("ladderExtendedDate").value = "";
+    }
 
 
     const displayLadderHeaders = new Headers();
@@ -1995,9 +2040,8 @@ function logLadderDisplayData(dataArray) {
         const cell = document.createElement('td');
         const input = document.createElement('input');
         input.style.outline = "none";
-        input.style.maxWidth = "140px";
-        input.style.height = "40px"
         input.style.border = "none";
+        input.style.width = "40%";
         input.style.textAlign = "center";
         
         input.type = 'text';

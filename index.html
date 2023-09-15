@@ -274,8 +274,8 @@
 
 
     <!-- ------------------------ Add New Ladder Modal ------------------------- -->
-    <dialog id="add-new-ladder-modal" style="display: none">
-      <div class="add-nlead-modal">
+    <dialog id="add-new-ladder-modal" style="display: none; height: 70%;">
+      <div class="add-nlead-modal" style="height: 100%;">
         <!-- Heading  -->
         <div class="heading">
           <span>Add New Ladder</span>
@@ -312,6 +312,7 @@
               <select
                 class="search_source selectpicker"
                 id="search_project_ladder"
+                multiple
                 data-att="search"
                 data-value="locationIntent"
                 data-live-search="true"
@@ -391,9 +392,8 @@
                 type="text"
                 data-att="input"
                 data-value="name"
-               / style="width: 100%;">
+               />
             </div>
-
             <div style="height: 38px;">
               <button
               class="quickFilter-btn btn1"
@@ -401,6 +401,10 @@
               >
               <img src="./images/Add.svg" alt="filter" />
               </button>
+            </div>
+            <div style="height: 38px">
+            </div>
+            <div style="height: 38px">
             </div>
             </div>
           </div>
@@ -1026,7 +1030,7 @@
                 <a id="kickerExtendedCreativeView" href=""><button  type="button" class="btn btn-info" style="width: 190px;">View Extended Creative</button></a>
               </div>
               <div style="height: 38px; display: flex; align-items: center; gap: 3px; width: 100%; margin-left: auto; justify-content: flex-end; margin-right: 5px;">
-                <p id="eistatusText">Not Extended</p>
+                <p id="kickerstatusText">Not Extended</p>
                 <label class="switch" style="margin: 0;">
                   <input type="checkbox" id="kickertoggleSwitch" style="margin: 0;">
                   <span class="slider"></span>
@@ -1140,20 +1144,17 @@
              <div>
               <span class="float-span">Ladder Type</span>
               <select
-                class="search_source selectpicker"
                 id="ladder_type_fetched"
-                data-att="search"
-                data-value="locationIntent"
-                title="Select Here..."
+                style="width: 100%; height: 100%; border: 2px solid rgba(224, 224, 224, 1); border-radius: 5px;"
               >
               <option value="Introspective">Introspective</option>
               <option value="Retrospective">Retrospective</option>
               </select>
             </div>
           </div>
-            <div class="details-item" id="sideContainer" style="flex: 2; border-left: 2px solid #F2F4F5; padding-left: 1rem; height: 185px; overflow-y: scroll;">
-              <table border="1" cellpadding="30" cellspacing="10" style="width: 100%; border-collapse: collapse;">
-                <thead style="background-color: #F2F4F5; position: sticky; top: 0; z-index: 1;  height: 54px;" id="details">
+            <div class="details-item" id="sideContainer" style="flex: 2; border-left: 2px solid #F2F4F5; padding-left: 1rem; height: 185px; overflow-y: scroll; overflow-x: hidden;">
+              <table border="1" style="max-width: 100%; width: 100%; border-collapse: collapse;">
+                <thead style="background-color: #000000; color: whitesmoke; position: sticky; top: 0; z-index: 1;  height: 54px;" id="details">
                   <tr>
                         <th style="text-align: center; ">Min Unit</th>
                         <th style="text-align: center;">Max Unit</th>
