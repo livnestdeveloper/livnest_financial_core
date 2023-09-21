@@ -6,24 +6,25 @@
     <title>Master</title>
 
     <!-- JQuery CDN -->
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"
-    ></script>
+       <!-- JQuery CDN -->
+       <script
+       type="text/javascript"
+       src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"
+     ></script>
+ 
+     <!-- Moment CDN (for date) -->
+     <script
+       type="text/javascript"
+       src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+     ></script>
+ 
+     <!-- Daterangepicker CDN -->
+     <script
+       type="text/javascript"
+       src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+     ></script>
 
-    <!-- Moment CDN (for date) -->
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
-    ></script>
-
-    <!-- Daterangepicker CDN -->
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
-    ></script>
-
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css" integrity="sha512-Z/def5z5u2aR89OuzYcxmDJ0Bnd5V1cKqBEbvLOiUNWdg9PQeXVvXLI90SE4QOHGlfLqUnDNVAYyZi8UwUTmWQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootsthap/5.3.1/css/bootsthap.min.css" integrity="sha512-Z/def5z5u2aR89OuzYcxmDJ0Bnd5V1cKqBEbvLOiUNWdg9PQeXVvXLI90SE4QOHGlfLqUnDNVAYyZi8UwUTmWQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
     <link rel="stylesheet" href="./css/bootsrap.css" />
     <link rel="stylesheet" href="./css/bootstrapSelect.css" />
@@ -32,11 +33,11 @@
     <link rel = "icon" href ="./images/logo.svg" type = "image/x-icon">
 
 
-    <!-- Bootstrap CDN -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+   <!-- Bootstrap CDN -->
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Bootstrap Select CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+   <!-- Bootstrap Select CDN -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
   
   </head>
   <body>
@@ -49,29 +50,27 @@
       <aside style="display: none">
         <!-- Filter Container Starts -->
         <div id="filter-container" style="display: block">
-          <!-- Filter Item name (input) -->
-          <div class="items">
-              <div class="filter-catergory" onclick="handleCategory(this)">
-               Ladders
-              </div>
-            </div>
-          </div>
-          <!-- Filter Item status (options) -->
-          <div class="items">
-            <div class="filter-catergory" onclick="handleCategory(this)">
-            Kickers
-            </div>
-          </div>
+          
+         
           <!-- Filter Item configuration (options) -->
           <div class="items">
-            <div class="filter-catergory" onclick="handleCategory(this)">
-            Executive Incentive 
+            <div class="filter-catergory">
+              <input
+              type="text"
+              name="Search_name"
+              value=""
+              placeholder="Name / Number"
+              id="name_search"
+            / style="border: 1px solid #F2F4F5;
+            border-radius: 6px;
+            width: 100%;
+            height: 36px; padding-left: 1rem">
             </div>
           </div>
           <!-- Filter Item homeLocation (search)-->
           <div class="items">
             <div class="filter-catergory" onclick="handleToggle(this)">
-             Select Location
+             Select Configuration
               <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
             </div>
 
@@ -83,11 +82,12 @@
             >
               <select
                 class="search_source selectpicker"
-                id="search_location_main"
-                data-live-search="true"
-                data-actions-box="true"
+                id="search_configuration"
+                multiple
+                data-live-search="thue"
+                data-actions-box="thue"
                 style="width: 100%"
-                title="Search  location.."
+                title="Search  Configuration.."
               >
                 
               </select>
@@ -96,7 +96,7 @@
           <!-- Filter Item locationIntent (search)-->
           <div class="items">
             <div class="filter-catergory" onclick="handleToggle(this)">
-              Select Developer 
+              Select Source 
               <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
             </div>
             <div
@@ -107,11 +107,12 @@
             >
               <select
                 class="search_source selectpicker"
-                id="search_developer_main"
-                data-live-search="true"
-                data-actions-box="true"
+                id="search_source"
+                multiple
+                data-live-search="thue"
+                data-actions-box="thue"
                 style="width: 100%"
-                title="Search Developer.."
+                title="Search Source.."
               >
                 
               </select>
@@ -132,8 +133,9 @@
               <select
                 class="search_source selectpicker"
                 id="search_project_main"
-                data-live-search="true"
-                data-actions-box="true"
+                multiple
+                data-live-search="thue"
+                data-actions-box="thue"
                 style="width: 100%"
                 title="Search Project.."
               >
@@ -141,12 +143,170 @@
               </select>
             </div>
           </div>
-          
-        
+          <!-- ------------------------ search Invoice Status ------------------------ -->
+          <div class="items">
+            <div class="filter-catergory" onclick="handleToggle(this)">
+              Select Invoice Status 
+              <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+            </div>
+            <div
+              class="filter-items"
+              data-ns="locationIntent"
+              data-type="search"
+              style="display: none"
+            >
+              <select
+                class="search_source selectpicker"
+                id="search_invoice_status"
+                multiple
+                data-live-search="thue"
+                data-actions-box="thue"
+                style="width: 100%"
+                title="Search Invoice Status.."
+              >
+                
+              </select>
+            </div>
+          </div>
+        <!-- -------------------------- search Team Lead --------------------------- -->
+        <div class="items">
+          <div class="filter-catergory" onclick="handleToggle(this)">
+            Select Team Lead 
+            <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+          </div>
+          <div
+            class="filter-items"
+            data-ns="locationIntent"
+            data-type="search"
+            style="display: none"
+          >
+            <select
+              class="search_source selectpicker"
+              id="search_team_lead"
+              data-live-search="thue"
+              multiple
+              data-actions-box="thue"
+              style="width: 100%"
+              title="Search Team LEad.."
+            >
+              
+            </select>
+          </div>
+        </div>
+
+        <!-- ----------------------- search invoice process ------------------------ -->
+
+        <div class="items">
+          <div class="filter-catergory" onclick="handleToggle(this)">
+            Select Invoice Process 
+            <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+          </div>
+          <div
+            class="filter-items"
+            data-ns="locationIntent"
+            data-type="search"
+            style="display: none"
+          >
+            <select
+              class="search_source selectpicker"
+              id="search_invoice_process"
+              data-live-search="thue"
+              multiple
+              data-actions-box="thue"
+              style="width: 100%"
+              title="Search Invoice Process.."
+            >
+              
+            </select>
+          </div>
+        </div>
+
+        <!-- --------------------------- search gst paid --------------------------- -->
+
+        <div class="items">
+          <div class="filter-catergory" onclick="handleToggle(this)">
+            Select Gst Paid 
+            <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+          </div>
+          <div
+            class="filter-items"
+            data-ns="locationIntent"
+            data-type="search"
+            style="display: none"
+          >
+            <select
+              class="search_source selectpicker"
+              id="search_gst_paid"
+              multiple
+              data-live-search="thue"
+              data-actions-box="thue"
+              style="width: 100%"
+              title="Search Gst Paid Status.."
+            >
+              
+            </select>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </div>
+        </div>
+
+        <!-- -------------------------- Search Sourced By -------------------------- -->
+
+        <div class="items">
+          <div class="filter-catergory" onclick="handleToggle(this)">
+            Select Sourced By
+            <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+          </div>
+          <div
+            class="filter-items"
+            data-ns="locationIntent"
+            data-type="search"
+            style="display: none"
+          >
+            <select
+              class="search_source selectpicker"
+              id="search_sourced_by"
+              data-live-search="thue"
+              data-actions-box="thue"
+              multiple
+              style="width: 100%"
+              title="Search Source.."
+            >
+              
+            </select>
+          </div>
+        </div>
+
+        <!-- -------------------------- Search Closed By --------------------------- -->
+
+        <div class="items">
+          <div class="filter-catergory" onclick="handleToggle(this)">
+            Select Closed By 
+            <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+          </div>
+          <div
+            class="filter-items"
+            data-ns="locationIntent"
+            data-type="search"
+            style="display: none"
+          >
+            <select
+              class="search_source selectpicker"
+              id="search_closed_by"
+              multiple
+              data-live-search="thue"
+              data-actions-box="thue"
+              style="width: 100%"
+              title="Search Closed By.."
+            >
+              
+            </select>
+          </div>
+        </div>
           <!-- Filter Item addedOn (daterange) -->
           <div class="items">
             <div class="filter-catergory" onclick="handleToggle(this)">
-              Filter Date
+              Closure Date
               <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
             </div>
 
@@ -158,14 +318,160 @@
             >
               <input
                 type="text"
-                name="datefilter"
+                name="closureDate"
                 value=""
                 placeholder="Select Date"
-                id="search_date"
+                id="search_closure_date"
               />
             </div>
           </div>
+
+          <!-- ------------------------ Follow Up date search ------------------------ -->
+
+          <div class="items">
+            <div class="filter-catergory" onclick="handleToggle(this)">
+              FollowUp Date
+              <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+            </div>
+
+            <div
+              class="filter-items"
+              data-ns="addedOn"
+              data-type="daterange"
+              style="display: none"
+            >
+              <input
+                type="text"
+                name="closureDate"
+                value=""
+                placeholder="Select Date"
+                id="search_followup_date"
+              />
+            </div>
+          </div>        
           
+          <!-- ------------------------- Search Invoice Date ------------------------- -->
+
+          <div class="items">
+            <div class="filter-catergory" onclick="handleToggle(this)">
+              Invoice Date
+              <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+            </div>
+
+            <div
+              class="filter-items"
+              data-ns="addedOn"
+              data-type="daterange"
+              style="display: none"
+            >
+              <input
+                type="text"
+                name="closureDate"
+                value=""
+                placeholder="Select Date"
+                id="search_invoice_date"
+              />
+            </div>
+          </div> 
+          
+          
+
+          <!-- --------------------------- Tentative Date ---------------------------- -->
+
+          <div class="items">
+            <div class="filter-catergory" onclick="handleToggle(this)">
+              Teantative Date
+              <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+            </div>
+
+            <div
+              class="filter-items"
+              data-ns="addedOn"
+              data-type="daterange"
+              style="display: none"
+            >
+              <input
+                type="text"
+                name="closureDate"
+                value=""
+                placeholder="Select Date"
+                id="search_tentative_date"
+              />
+            </div>
+          </div>        
+          
+
+          <!-- -------------------------- BA 2 Date search --------------------------- -->
+          <div class="items">
+            <div class="filter-catergory" onclick="handleToggle(this)">
+              Search BA 2 date
+              <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+            </div>
+
+            <div
+              class="filter-items"
+              data-ns="addedOn"
+              data-type="daterange"
+              style="display: none"
+            >
+              <input
+                type="text"
+                name="closureDate"
+                value=""
+                placeholder="Select Date"
+                id="search_ba_2"
+              />
+            </div>
+          </div> 
+          <!-- -------------------------- BA 3 Date search --------------------------- -->
+
+
+          <div class="items">
+            <div class="filter-catergory" onclick="handleToggle(this)">
+              Search BA 3 date
+              <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+            </div>
+
+            <div
+              class="filter-items"
+              data-ns="addedOn"
+              data-type="daterange"
+              style="display: none"
+            >
+              <input
+                type="text"
+                name="closureDate"
+                value=""
+                placeholder="Select Date"
+                id="search_ba_3"
+              />
+            </div>
+          </div> 
+
+          <!-- --------------------------- SDR DATE search --------------------------- -->
+
+          <div class="items">
+            <div class="filter-catergory" onclick="handleToggle(this)">
+              Search SDR date
+              <img src="./images/DownArrow.svg" alt="DownArrow" class="" />
+            </div>
+
+            <div
+              class="filter-items"
+              data-ns="addedOn"
+              data-type="daterange"
+              style="display: none"
+            >
+              <input
+                type="text"
+                name="closureDate"
+                value=""
+                placeholder="Select Date"
+                id="search_sdr_date"
+              />
+            </div>
+          </div> 
+
         <!-- Floating Button Starts -->
         <div class="btn-container" style="display: flex">
           <button class="search-btn btn1" onclick="handleSearch()">
@@ -188,103 +494,60 @@
 
         <div
           class="quick-filter-container"
-          style="display: flex; background-color: #F2F4F5; justify-content: flex-end; gap: 2rem"
+          style="display: flex; justify-content: flex-end; gap: 2rem; "
         >
-
-        <!-- ------------------------- ADD ladder button start ------------------------- -->
-           <button
-              class="quickFilter-btn btn1"
-              id="addLadder"
-              onclick="openDialog('add-new-ladder-modal')">
-              <img src="./images/Add.svg" alt="filter" />
-              Add New Ladder
-           </button>
-
-           <!-- ------------------------ Add Ladder Button End ------------------------ -->
-
-           <!-- ----------------------- Add Kicker Button start ----------------------- -->
-           <button
-              class="quickFilter-btn btn1"
-              id="addKicker"
-              onclick="openDialog('add-new-kicker-modal')">
-              <img src="./images/Add.svg" alt="filter" />
-              Add New Kicker
-           </button>
-
-            <!-- ----------------------- Add Kicker Button end ----------------------- -->
-
-            <!-- ------------------------- Add Ei button start ------------------------- -->
-           <button
-              class="quickFilter-btn btn1"
-              id="addEi"
-              onclick="openDialog('add-new-ei-modal')">
-              <img src="./images/Add.svg" alt="filter" />
-              Add New Ei
-           </button>
-
-            <!-- ------------------------- Add Ei button end ------------------------- -->
-
-          <button
+            <button
             class="quickFilter-btn btn1"
-            onclick="openDialog('add-new-lead-modal')">
+            onclick="openDialog('remarks-dialog')">
             <img src="./images/Add.svg" alt="filter" />
-            Add New Project
-          </button>
-
-          
+            Add New Client
+            </button>
         </div>
 
-
-        <div class="ladderclass" id="ladder_div" style="display: block;">
-          <div class="ladderHeader">
-            <span>Ladders</span>
-              
-          </div>
-
-          <div class="ladderCards" id="ladderCards"></div>
-
-        </div>
-        <div class="kickerclass" id="kicker_div" style="display: none;">
-          <div class="kickerHeader">
-              <span>Kickers</span>
-              
-          </div>
-
-          <div class="kickerCards" id="kickerCards"></div>
-
-          </div>
-
-        </div>
-        <div class="eiclass" id="ei_div" style="display: none;">
-          <div class="eiHeader">
-              <span>Executive Incentive</span>
-             
-          </div>
-
-          <div class="eiCards" id="eiCards"></div>
-        </div>
-
-
-
+        <!-- ------------------------------ Table Div ------------------------------ -->
+        <div
+        class="table-container"
+        style="overflow-y: scroll; max-height: 87vh"
+      >
+        <!-- Table Starts -->
+        <table border="1" id="dataRows">
+          <thead style="background-color: #fafafc">
+            <tr>
+              <th style="width: 11.2rem">NAME</th>
+              <th style="width: 11.2rem">AGREEMENT VALUE</th>
+              <th style="width: 11.6rem; position: relative">PROJECT</th>
+              <th style="width: 11.6rem">UNIT</th>
+              <th style="width: 11rem">OB-STATUS</th>
+              <th style="width: 11rem">BROKERAGE <br> PERCENT</th>
+              <th style="width: 11rem">CLOSURE <br> DATE</th>
+              <th style="width: 11rem">INVOICE <br> STATUS</th>
+              <th style="width: 4rem">ACTION</th>
+            </tr>
+          </thead>
+          <tbody id="table_body">
+          </tbody>
+        </table>
         
+        <!-- Table Ends -->
+      </div>
       </section>
       <!-- Right Section Starts -->
     </main>
     <!-- Main Section Starts -->
 
 
-    <!-- ------------------------ Add New Ladder Modal ------------------------- -->
-    <dialog id="add-new-ladder-modal" style="display: none; height: 70%;">
+    <!-- ------------------------ UPDATE CLIENT INFORMATION ------------------------- -->
+    <dialog id="update-client" style="display: none; height: 70%;">
       <div class="add-nlead-modal" style="height: 100%;">
         <!-- Heading  -->
         <div class="heading">
-          <span>Add New Ladder</span>
+          <span>Update Client</span>
           <img
             class="close-btn"
             style="cursor: pointer"
             src="./images/Close.svg"
             alt="close"
-            onclick="closeDialog('add-new-ladder-modal')"
+            onclick="closeDialog('update-client')"
           />
         </div>
 
@@ -301,8 +564,8 @@
                 id="search_developer_ladder"
                 data-att="search"
                 data-value="homeLocation"
-                data-live-search="true"
-                data-actions-box="true"
+                data-live-search="thue"
+                data-actions-box="thue"
                 title="Search Here..."
               >
               </select>
@@ -315,8 +578,8 @@
                 multiple
                 data-att="search"
                 data-value="locationIntent"
-                data-live-search="true"
-                data-actions-box="true"
+                data-live-search="thue"
+                data-actions-box="thue"
                 title="Search Here..."
               >
               </select>
@@ -330,8 +593,8 @@
                 data-value="locationIntent"
                 title="Search Here..."
               >
-              <option value="Introspective">Introspective</option>
-              <option value="Retrospective">Retrospective</option>
+              <option value="Inthospective">Inthospective</option>
+              <option value="Rethospective">Rethospective</option>
               </select>
             </div>
           </div>
@@ -433,817 +696,126 @@
       </div>
     </dialog>
 
-    <!-- ---------------------- add new ladder modal end ----------------------- -->
+    <!-- ---------------------- UPDATE CLIENT INFORMATION END ----------------------- -->
 
-    <!-- ------------------------ add new kicker modal ------------------------- -->
+<!-- ------------------------ UPDATE REMARK END ------------------------- -->
+<dialog id="remarks-dialog" style="display: none; height: 70%; overflow-x: hidden;">
+  <div class="add-nlead-modal" style="height: 100%;">
+    <!-- Heading  -->
+    <div class="heading">
+      <span>Update Remark</span>
+      <img
+        class="close-btn"
+        style="cursor: pointer"
+        src="./images/Close.svg"
+        alt="close"
+        onclick="closeDialog('remarks-dialog')"
+      />
+    </div>
 
-    <dialog id="add-new-kicker-modal" style="display: none;">
-      <div class="add-nlead-modal">
-        <div class="heading">
-          <span>Add New Kicker</span>
-          <img
-            class="close-btn"
-            style="cursor: pointer"
-            src="./images/Close.svg"
-            alt="close"
-            onclick="closeDialog('add-new-kicker-modal')"
-          />
-        </div>
-          <div class="details-container" style="display: block">
-            <!-- Details Items  -->
-            <div class="details-item">
-              <div>
-                <span class="float-span">Select Developer</span>
-                <select
-                  class="search_source selectpicker"
-                  id="search_developer_kicker"
-                  data-att="search"
-                  data-value="homeLocation"
-                  data-live-search="true"
-                  data-actions-box="true"
-                  title="Search Here..."
-                >
-                  <option>Option A</option>
-                </select>
-              </div>
-              <div>
-                <span class="float-span">Select Project</span>
-                <select
-                  class="search_source selectpicker"
-                  id="search_project_kicker"
-                  data-att="search"
-                  data-value="locationIntent"
-                  data-live-search="true"
-                  data-actions-box="true"
-                  title="Search Here..."
-                >
-                  <option>Option A</option>
-                </select>
-              </div>
-            </div>
-  
-            <div class="details-item">
-              <div style="height: 38px">
-                <span class="float-span">Select Kicker Start Date</span>
-                <input
-                  placeholder="Enter Here"
-                  name="kickerStartDate"
-                  id="kickerStartDate"
-                  type="date"
-                  data-att="input"
-                  data-value="name"
-                />
-              </div>
-              <div style="height: 38px">
-                <span class="float-span">Select Kicker End Date</span>
-                <input
-                  placeholder="Enter Here"
-                  name="kickerEndDate"
-                  id="kickerEndDate"
-                  type="date"
-                  data-att="input"
-                  data-value="name"
-                 />
-              </div>
-            </div>
-  
-            <!-- ---------------------- Adding the Kicker Stages ----------------------- -->
-            <div class="dealRows" id="dealRow">
-             <div class="details-item" id="ladderDeals" style="flex-direction: row;">
-              <div style="height: 38px">
-                <span class="float-span">Target Amount</span>
-                <input
-                  placeholder="Enter Target Amount"
-                  id="kickerTargetAmount"
-                  type="text"
-                  data-att="input"
-                  data-value="name"
-                 />
-              </div>
-              <div style="height: 38px">
-                <span class="float-span">Target Unit</span>
-                <input
-                  placeholder="Enter Target Unit"
-                  id="kickerTargetUnit"
-                  type="text"
-                  data-att="input"
-                  data-value="name"
-                 />
-              </div>
-              <div style="height: 38px">
-                <span class="float-span">Completion Percentage</span>
-                <input
-                  placeholder="Completion Percent"
-                  id="kickerTargetPercent"
-                  type="text"
-                  data-att="input"
-                  data-value="name"
-                 / style="width: 100%;">
-              </div>
-  
-              </div>
-            </div>
-  
-            <div class="details-item">
-              <div style="height: 48px; width: 123px;">
-                <span class="float-span">Kicker Creative</span>
-                <input
-                  placeholder="Upload creative"
-                  id="kickerCreative"
-                  type="file"
-                  data-att="input"
-                  data-value="name"
-                 / style="width: 240px;">
-              </div>
-            </div>
-  
-          </div>
-
-          <div style="display: flex;text-align: center;width: 100%;margin: auto;justify-content: center;">
-            <button class="dialog-btn" onclick="addKickerFunction()">
-              Submit
-            </button>
-          </div>
-
+    <!-- Details Accordion -->
+    
+    <!-- Details Items Container -->
+    <div class="details-container" style="display: block">
+      <!-- Details Items  -->
+      <div class="details-item">
+        <div>
+          <span class="float-span">Enter Remark</span>
+          <textarea
+            id="remark"
+          style="width: 100%; padding-left: 8px; padding-top: 5px;"></textarea>
         </div>
       </div>
-    </dialog>
 
-    <!-- ---------------------- add new kicker modal ends ---------------------- -->
-
-
-    <!-- ----------------------- add new Ei modal start ------------------------ -->
-
-    <dialog id="add-new-ei-modal" style="display: none;">
-      <div class="add-nlead-modal">
-        <div class="heading">
-          <span>Add New Executive Incentive</span>
-          <img
-            class="close-btn"
-            style="cursor: pointer"
-            src="./images/Close.svg"
-            alt="close"
-            onclick="closeDialog('add-new-ei-modal')"
+      <div class="details-item">
+        <div style="height: 38px">
+          <span class="float-span" style="left: 1px;">Select Follow Up Type</span>
+          <select
+            class="search_source selectpicker"
+            name="follow_up_type"
+            id="follow_up_type"
+            type="date"
+            data-att="input"
+            data-value="name"
           />
+          <option value="client">Client Follow Up</option>
+          <option value="developer">Developer Follow Up</option>
+        </select>
         </div>
-          <div class="details-container" style="display: block">
-            <!-- Details Items  -->
-            <div class="details-item">
-              <div>
-                <span class="float-span">Select Developer</span>
-                <select
-                  class="search_source selectpicker"
-                  id="search_developer_ei"
-                  data-att="search"
-                  data-value="homeLocation"
-                  data-live-search="true"
-                  data-actions-box="true"
-                  title="Search Here..."
-                >
-                </select>
-              </div>
-              <div>
-                <span class="float-span">Select Project</span>
-                <select
-                  class="search_source selectpicker"
-                  id="search_project_ei"
-                  data-att="search"
-                  data-value="locationIntent"
-                  data-live-search="true"
-                  data-actions-box="true"
-                  title="Search Here..."
-                >
-                </select>
-              </div>
-            </div>
-  
-            <div class="details-item">
-              <div style="height: 38px">
-                <span class="float-span">Select EI Start Date</span>
-                <input
-                  placeholder="Enter Here"
-                  name="eiStartDate"
-                  id="eiStartDate"
-                  type="date"
-                  data-att="input"
-                  data-value="name"
-                />
-              </div>
-              <div style="height: 38px">
-                <span class="float-span">Select EI End Date</span>
-                <input
-                  placeholder="Enter Here"
-                  name="eiEndDate"
-                  id="eiEndDate"
-                  type="date"
-                  data-att="input"
-                  data-value="name"
-                 />
-              </div>
-            </div>
-  
-            <!-- ---------------------- Adding the Kicker Stages ----------------------- -->
-            <div class="dealRows" id="dealRow">
-             <div class="details-item" id="ladderDeals" style="flex-direction: row;">
-              <div style="height: 38px">
-                <span class="float-span">Target Amount</span>
-                <input
-                  placeholder="Enter Target Amount"
-                  id="eiTargetAmount"
-                  type="text"
-                  data-att="input"
-                  data-value="name"
-                 />
-              </div>
-              <div style="height: 38px">
-                <span class="float-span">Target Unit</span>
-                <input
-                  placeholder="Enter Target Unit"
-                  id="eiTargetUnit"
-                  type="text"
-                  data-att="input"
-                  data-value="name"
-                 />
-              </div>
-              <div style="height: 38px">
-                <span class="float-span">Completion Percentage</span>
-                <input
-                  placeholder="Completion Percent"
-                  id="eiTargetPercent"
-                  type="text"
-                  data-att="input"
-                  data-value="name"
-                 / style="width: 100%;">
-              </div>
-  
-              </div>
-            </div>
-  
-            <div class="details-item">
-              <div style="height: 48px; width: 123px;">
-                <span class="float-span">EI Creative</span>
-                <input
-                  placeholder="Upload creative"
-                  id="eiCreative"
-                  type="file"
-                  data-att="input"
-                  data-value="name"
-                 / style="width: 240px;">
-              </div>
-            </div>
-  
-          </div>
-          <div style="display: flex;text-align: center;width: 100%;margin: auto;justify-content: center;">
-            <button class="dialog-btn" onclick="addEiFunction()">
-              Submit
-            </button>
-          </div>
+        <div style="height: 38px">
+          <span class="float-span">FollowUp Date</span>
+          <input
+            placeholder="Enter Here"
+            name="follow_up_date"
+            id="follow_up_date"
+            type="date"
+            data-att="input"
+            data-value="name"
+           />
         </div>
-       
+        <div style="height: 38px">
+          <button class="dialog-btn" onclick="updateUserRemark()" id="add_followup">
+            ADD
+          </button>
+        </div>
+      </div>
+      <div  id="remarkrowsappend">
+                
+      </div>
       </div>
 
+    </div>
+
+
+  
+  </div>
+</dialog>
+
+<!-- ---------------------- UPDATE REMARK END----------------------- -->
+
+
+
+<!-- ------------------------  REMARK HISTORY END ------------------------- -->
+<dialog id="remarks-history-dialog" style="display: none; height: 70%; overflow-x: hidden;">
+  <div class="add-nlead-modal" >
+    <!-- Heading  -->
+    <div class="heading">
+      <span>Remark History</span>
+      <img
+        class="close-btn"
+        style="cursor: pointer"
+        src="./images/Close.svg"
+        alt="close"
+        onclick="closeDialog('remarks-history-dialog')"
+      />
+    </div>
+
+    <!-- Details Accordion -->
       
-    </dialog>
-
-    <!-- ------------------------ add new ei modal end ------------------------- -->
-
-
-    <!-- --------------------- add new project modal start --------------------- -->
-    <dialog id="add-new-lead-modal" style="display: none;">
-      <div class="add-nlead-modal">
-        <!-- Heading  -->
-        <div class="heading">
-          <span>Add New Project</span>
-          <img
-            class="close-btn"
-            style="cursor: pointer"
-            src="./images/Close.svg"
-            alt="close"
-            onclick="closeDialog('add-new-lead-modal')"
-          />
-        </div>
-
-        <!-- Details Accordion -->
-        
-        <!-- Details Items Container -->
-        <div class="details-container" style="display: block">
-          <!-- Details Items  -->
-          <div class="details-item">
-            <div style="height: 38px">
-              <span class="float-span">Project Name</span>
-              <input
-                placeholder="Enter  Here"
-                type="text"
-                data-att="input"
-                data-value="name"
-                id="add_project_name"
-              />
-            </div>
-           
-          </div>
-
-          <!-- Details Items  -->
-          <div class="details-item">
-            <div>
-              <span class="float-span">Select Location</span>
-              <select
-                class="search_source selectpicker"
-                id="search_location_add_project"
-                data-att="search"
-                data-value="homeLocation"
-                data-live-search="true"
-                data-actions-box="true"
-                title="Search Here..."
-              >
-              </select>
-            </div>
-            <div>
-              <span class="float-span">Select Developer</span>
-              <select
-                class="search_source selectpicker"
-                id="search_developer_add_project"
-                data-att="search"
-                data-value="locationIntent"
-                data-live-search="true"
-                data-actions-box="true"
-                title="Search Here..."
-              >
-              </select>
-            </div>
-          </div>
+         <div class="remarksDiv" id="remarksDiv">
           
           
         </div>
-        <div style="display: flex;text-align: center;width: 100%;margin: auto;justify-content: center;">
-          <button class="dialog-btn" onclick="addNewProject()" id="addProject">
-            Submit
-          </button>
-        </div>
-      </div>
-    </dialog>
+  </div>
+</dialog>
 
-   <!-- ---------------------- add new project modal end ---------------------- -->
-   
-
-   <!-- ---------------------------- Show Ei Data ----------------------------- -->
+<!-- ----------------------  REMARK HISTORY END----------------------- -->
 
 
-   <dialog id="show-ei-modal" style="display: none;">
-    <div class="add-nlead-modal">
-      <div class="heading">
-        <span id="showEiProjectName"></span>
-        <img
-          class="close-btn"
-          style="cursor: pointer"
-          src="./images/Close.svg"
-          alt="close"
-          onclick="closeDialog('show-ei-modal')"
-        />
-      </div>
-        <div class="details-container" style="display: block">
-          <div class="EiDeveloperName" style="display: flex; text-align: center; justify-content: center;">
-            <span id="EiDeveloperName"></span>
-          </div><br>
-          <!-- Details Items  -->
-          <div class="details-item">
-            <div style="height: 48px">
-              <span class="float-span">Start Date</span>
-              <input
-                name="eiDisplayStartDate"
-                id="eiDisplayStartDate"
-                type="text"
-                data-att="input"
-                data-value="name"
-              / readonly>
-            </div>
-            <div style="height: 48px">
-              <span class="float-span">End Date</span>
-              <input
-                name="eiDisplayEndDate"
-                id="eiDisplayEndDate"
-                type="text"
-                data-att="input"
-                data-value="name"
-               / readonly>
-            </div>
-            <div style="height: 48px;">
-              <span class="float-span">Update Creative</span>
-              <input
-                placeholder="Upload creative"
-                id="eiUpdatedCreative"
-                type="file"
-                data-att="input"
-                data-value="name"
-               /" style="outline: none;">
-            </div>
-          </div>
-
-          <!-- ---------------------- Adding the Kicker Stages ----------------------- -->
-          <div class="dealRows" id="dealRow">
-           <div class="details-item" id="ladderDeals" style="flex-direction: row; border-bottom: 1px solid rgba(234, 234, 234, 1); margin-bottom: 4px; padding: 1rem;">
-            <div style="height: 38px">
-              <span class="float-span">Target Amount</span>
-              <input
-                id="eiDisplayTargetAmount"
-                type="text"
-                data-att="input"
-                data-value="name"
-               />
-            </div>
-            <div style="height: 38px">
-              <span class="float-span">Target Unit</span>
-              <input
-                id="eiDisplayTargetUnit"
-                type="text"
-                data-att="input"
-                data-value="name"
-               />
-            </div>
-            <div style="height: 38px">
-              <span class="float-span">Percentage</span>
-              <input
-                id="eiDisplayTargetPercent"
-                type="text"
-                data-att="input"
-                data-value="name"
-               / style="width: 100%;">
-            </div>
-
-            </div>
-
-            <div class="details-item" style="padding: 1rem; border-bottom: 1px solid rgba(234, 234, 234, 1);">
-              <div style="display: flex;">
-                <a id="eiCreativeView" href=""><button  type="button" class="btn btn-info" style="width: 120px;">View Creative</button></a>
-                <a id="eiExtendedCreativeView" href=""><button  type="button" class="btn btn-info" style="width: 170px;">View Extended Creative</button></a> 
-              </div>
-              <div style="height: 38px; display: flex; align-items: center; gap: 3px; width: 100%; margin-left: auto; justify-content: flex-end; margin-right: 5px;">
-                <p id="statusText">Not Extended</p>
-                <label class="switch" style="margin: 0;">
-                  <input type="checkbox" id="EitoggleSwitch" style="margin: 0;">
-                  <span class="slider"></span>
-                </label>
-             </div>
-            
-            </div>
-
-            <div class="eiHiddenDiv" id="eiHiddenDiv" style="display: none;">
-              <input type="text" id="eiHiddenProjectId"  style="display: none;">
-              <input type="text" id="eiHiddenDeveloperId"  style="display: none;">
-              <input type="text" id="eiHiddenStartDate"  style="display: none;">
-              <input type="text" id="eiHiddenEndDate"  style="display: none;">
-            </div>
-
-            <div class="details-item" id="eiExtendedDiv">
-              <div style="height: 48px">
-                <span class="float-span">Extended Date</span>
-                <input
-                  name="eiExtendedDate"
-                  id="eiExtendedDate"
-                  type="date"
-                  data-att="input"
-                  data-value="name"
-                 />
-              </div>
-              <div style="height: 48px;" id="extendedShowCreativeDivEi">
-                <span class="float-span" id="">Extended Creative</span>
-                <input
-                  placeholder="Upload creative"
-                  id="eiExtendedCreative"
-                  type="file"
-                  data-att="input"
-                  data-value="name"
-                 /">
-              </div>
-            </div>
-          </div>
-
-           
 
 
-        </div>
-        <div style="display: flex;text-align: center;width: 100%;margin: auto;justify-content: center;">
-          <button class="dialog-btn" onclick="updateEiFunction()">
-            Update
-          </button>
-        </div>
-      </div>
-     
-    </div>
-
-    
-  </dialog>
 
 
-   <!-- ------------------------- Show Ei Data close -------------------------- -->
-    
-
-
-   <!-- -------------------------- Show kicker data --------------------------- -->
-
-
-   <dialog id="show-kicker-modal" style="display: none;">
-    <div class="add-nlead-modal">
-      <div class="heading">
-        <span id="showKickerProjectName"></span>
-        <img
-          class="close-btn"
-          style="cursor: pointer"
-          src="./images/Close.svg"
-          alt="close"
-          onclick="closeDialog('show-kicker-modal')"
-        />
-      </div>
-        <div class="details-container" style="display: block">
-          <div class="kickerDeveloperName" style="display: flex; text-align: center; justify-content: center;">
-            <span id="kickerDeveloperName"></span>
-          </div><br>
-          <!-- Details Items  -->
-          <div class="details-item">
-            <div style="height: 38px">
-              <span class="float-span">Start Date</span>
-              <input
-                name="kickerDisplayStartDate"
-                id="kickerDisplayStartDate"
-                type="text"
-                data-att="input"
-                data-value="name"
-              / readonly>
-            </div>
-            <div style="height: 38px">
-              <span class="float-span">End Date</span>
-              <input
-                name="kickerDisplayEndDate"
-                id="kickerDisplayEndDate"
-                type="text"
-                data-att="input"
-                data-value="name"
-               / readonly>
-            </div>
-            <div style="height: 48px;">
-              <span class="float-span">Update Creative</span>
-              <input
-                placeholder="Upload creative"
-                id="kickerUpdatedCreative"
-                type="file"
-                data-att="input"
-                data-value="name"
-               /">
-            </div>
-          </div>
-
-          <!-- ---------------------- Adding the Kicker Stages ----------------------- -->
-          <div class="dealRows" id="dealRow">
-           <div class="details-item" id="ladderDeals" style="flex-direction: row; border-bottom: 1px solid rgba(234, 234, 234, 1); margin-bottom: 4px; padding: 1rem;">
-            <div style="height: 38px">
-              <span class="float-span">Target Amount</span>
-              <input
-                id="kickerDisplayTargetAmount"
-                type="text"
-                data-att="input"
-                data-value="name"
-               />
-            </div>
-            <div style="height: 38px">
-              <span class="float-span">Target Unit</span>
-              <input
-                id="kickerDisplayTargetUnit"
-                type="text"
-                data-att="input"
-                data-value="name"
-               />
-            </div>
-            <div style="height: 38px">
-              <span class="float-span">Percentage</span>
-              <input
-                id="kickerDisplayTargetPercent"
-                type="text"
-                data-att="input"
-                data-value="name"
-               / style="width: 100%;">
-            </div>
-
-            </div>
-
-            <div class="details-item" style="padding: 1rem; border-bottom: 1px solid rgba(234, 234, 234, 1);">
-              <div style="display: flex;">
-                <a id="kickerCreativeView" href=""><button  type="button" class="btn btn-info" style="width: 120px;">View Creative</button></a>
-                <a id="kickerExtendedCreativeView" href=""><button  type="button" class="btn btn-info" style="width: 190px;">View Extended Creative</button></a>
-              </div>
-              <div style="height: 38px; display: flex; align-items: center; gap: 3px; width: 100%; margin-left: auto; justify-content: flex-end; margin-right: 5px;">
-                <p id="kickerstatusText">Not Extended</p>
-                <label class="switch" style="margin: 0;">
-                  <input type="checkbox" id="kickertoggleSwitch" style="margin: 0;">
-                  <span class="slider"></span>
-                </label>
-             </div>
-            
-            </div>
-
-            <div class="kickerHiddenDiv" id="kickerHiddenDiv" style="display: none;">
-              <input type="text" id="kickerHiddenProjectId"  style="display: none;">
-              <input type="text" id="kickerHiddenDeveloperId"  style="display: none;">
-              <input type="text" id="kickerHiddenStartDate"  style="display: none;">
-              <input type="text" id="kickerHiddenEndDate"  style="display: none;">
-            </div>
-
-            <div class="details-item" id="kickerExtendedDiv">
-              <div style="height: 48px">
-                <span class="float-span">Extended Date</span>
-                <input
-                  name="kickerExtendedDate"
-                  id="kickerExtendedDate"
-                  type="date"
-                  data-att="input"
-                  data-value="name"
-                 />
-              </div>
-              <div style="height: 48px;">
-                <span class="float-span">Extended Creative</span>
-                <input
-                  placeholder="Upload creative"
-                  id="kickerExtendedCreative"
-                  type="file"
-                  data-att="input"
-                  data-value="name"
-                 /">
-              </div>
-            </div>
-          </div>
-
-           
-
-
-        </div>
-        <div style="display: flex;text-align: center;width: 100%;margin: auto;justify-content: center;">
-          <button class="dialog-btn" onclick="updateKickerFunction()">
-            Update
-          </button>
-        </div>
-      </div>
-     
-    </div>
-
-    
-  </dialog>
-
-
-   <!-- ------------------------ Show kicker data end ------------------------- -->
-
-
-   <!-- -------------------------- Show ladder modal -------------------------- -->
-
-   <dialog id="show-ladder-modal" style="display: none;">
-    <div class="add-nlead-modal">
-      <div class="heading">
-        <span id="showLadderProjectName"></span>
-        <img
-          class="close-btn"
-          style="cursor: pointer"
-          src="./images/Close.svg"
-          alt="close"
-          onclick="closeDialog('show-ladder-modal')"
-        />
-      </div>
-        <div class="details-container" style="display: block; flex-direction: column;">
-          <div class="ladderDeveloperName" style="display: flex; text-align: center; justify-content: center;">
-            <span id="ladderDeveloperName"></span>
-          </div><br>
-          <!-- Details Items  -->
-          <div class="details-item" style="display: flex;">
-            <div class="details-item" style="display: flex; flex-direction: column;">
-            <div style="height: 30px">
-              <span class="float-span">Start Date</span>
-              <input
-                name="ladderDisplayStartDate"
-                id="ladderDisplayStartDate"
-                type="text"
-                data-att="input"
-                data-value="name"
-              / readonly>
-            </div>
-            <div style="height: 30px">
-              <span class="float-span">End Date</span>
-              <input
-                name="ladderDisplayEndDate"
-                id="ladderDisplayEndDate"
-                type="text"
-                data-att="input"
-                data-value="name"
-               / readonly>
-             </div>
-             <div style="height: 30px">
-              <span class="float-span">Creative</span>
-              <input
-                name="updateLadderCreative"
-                id="updateLadderCreative"
-                type="file"
-                data-att="input"
-                data-value="name"
-               / readonly>
-             </div>
-             <div>
-              <span class="float-span">Ladder Type</span>
-              <select
-                id="ladder_type_fetched"
-                style="width: 100%; height: 100%; border: 2px solid rgba(224, 224, 224, 1); border-radius: 5px;"
-              >
-              <option value="Introspective">Introspective</option>
-              <option value="Retrospective">Retrospective</option>
-              </select>
-            </div>
-          </div>
-            <div class="details-item" id="sideContainer" style="flex: 2; border-left: 2px solid #F2F4F5; padding-left: 1rem; height: 185px; overflow-y: scroll; overflow-x: hidden;">
-              <table border="1" style="max-width: 100%; width: 100%; border-collapse: collapse;">
-                <thead style="background-color: #000000; color: whitesmoke; position: sticky; top: 0; z-index: 1;  height: 54px;" id="details">
-                  <tr>
-                        <th style="text-align: center; ">Min Unit</th>
-                        <th style="text-align: center;">Max Unit</th>
-                        <th style="text-align: center;">Percentage</th>
-                    </tr>
-                </thead>
-                <tbody id="table_body">
-                    
-                </tbody>
-            </table>
-            </div>
-          </div>
-
-          
-
-          <!-- ---------------------- Adding the Kicker Stages ----------------------- -->
-          <div class="dealRows" id="dealRow">
-         
-            <div class="details-item" style="padding: 1rem; border-bottom: 1px solid rgba(234, 234, 234, 1);">
-              <div style="display: flex;">
-                <a id="ladderCreativeView" href=""><button  type="button" class="btn btn-info" style="width: 120px;">View Creative</button></a>
-                <a id="ladderExtendedCreativeView" href=""><button  type="button" class="btn btn-info" >View Extended Creative</button></a>
-              </div>
-              <div style="height: 38px; display: flex; align-items: center; gap: 3px; width: 100%; margin-left: auto; justify-content: flex-end; margin-right: 5px;">
-                <p id="ladderstatusText">Not Extended</p>
-                <label class="switch" style="margin: 0;">
-                  <input type="checkbox" id="laddertoggleSwitch" style="margin: 0;">
-                  <span class="slider"></span>
-                </label>
-             </div>
-            
-            </div>
-
-
-            <div class="ladderHiddenDiv" id="ladderHiddenDiv" style="display: none;">
-              <input type="text" id="ladderHiddenProjectId"  style="display: none;">
-              <input type="text" id="ladderHiddenDeveloperId"  style="display: none;">
-              <input type="text" id="ladderHiddenStartDate"  style="display: none;">
-              <input type="text" id="ladderHiddenEndDate"  style="display: none;">
-            </div>
-             
-            <div class="details-item" id="ladderExtendedDiv">
-              <div style="height: 48px">
-                <span class="float-span">Extended Date</span>
-                <input
-                  name="ladderExtendedDate"
-                  id="ladderExtendedDate"
-                  type="date"
-                  data-att="input"
-                  data-value="name"
-                 />
-              </div>
-              <div style="height: 48px;">
-                <span class="float-span">Extended Creative</span>
-                <input
-                  placeholder="Upload creative"
-                  id="ladderExtendedCreative"
-                  type="file"
-                  data-att="input"
-                  data-value="name"
-                 /">
-              </div>
-            </div>
-          </div>
-
-           
-
-
-        </div>
-        <div style="display: flex;text-align: center;width: 100%;margin: auto;justify-content: center;">
-          <button class="dialog-btn" onclick="updateLadderFunction()">
-            Update
-          </button>
-        </div>
-      </div>
-     
-    </div>
-
-    
-  </dialog>
-
-   <!-- ------------------------ Show ladder modal end ------------------------ -->
-
+ 
     <script src="./js/script.js"></script>
+    <script src="./js/filter.js"></script>
+    <script src="./js/openRemark.js"></script>
+
 
     <!-- Daterange Script -->
     <script type="text/javascript">
       $(function () {
-        $('input[name="datefilter"]').daterangepicker({
+        $('input[name="closureDate"]').daterangepicker({
           autoUpdateInput: false,
           locale: {
             cancelLabel: "Clear",
@@ -1265,7 +837,7 @@
           },
         });
 
-        $('input[name="datefilter"]').on(
+        $('input[name="closureDate"]').on(
           "apply.daterangepicker",
           function (ev, picker) {
             $(this).val(
@@ -1276,7 +848,7 @@
           }
         );
 
-        $('input[name="datefilter"]').on(
+        $('input[name="closureDate"]').on(
           "cancel.daterangepicker",
           function (ev, picker) {
             $(this).val("");
@@ -1286,8 +858,7 @@
 
 
     </script>
-
-    <!-- Bootstrap Select Script -->
+    <!-- Bootsthap Select Script -->
     <script>
       $(document).ready(function () {
         $(".selectpicker").selectpicker();
@@ -1297,31 +868,35 @@
     <!-- Script to close the table see more  -->
     <script>
       $(document).ready(function () {
-        function closeOtherDivs(target) {
-          $(".see-more").not(target).slideUp();
-          $(".active-see-more").removeClass("active-see-more"); // Remove active class
-          $(".nested-see-more").hide(); // Hide nested-see-more
-        }
-
-        function hideAllDivs() {
-          $(".see-more").slideUp();
-        }
-
-        $(".see-more").click(function (event) {
-          event.stopPropagation(); // Prevent div click from closing itself
-        });
-        $("td[data-label='see-more']").click(function (event) {
-          event.stopPropagation(); // Prevent click from propagating to document
-          var target = $(this).find(".see-more");
-          target.slideToggle();
-          closeOtherDivs(target);
-        });
-
-        $(document).click(function () {
-          hideAllDivs();
-        });
+          function closeOtherDivs(target) {
+              $(".see-more").not(target).slideUp();
+              $(".active-see-more").removeClass("active-see-more"); // Remove active class
+              $(".nested-see-more").hide(); // Hide nested-see-more
+          }
+  
+          function hideAllDivs() {
+              $(".see-more").slideUp();
+          }
+  
+          // Use event delegation to handle clicks on td[data-label='see-more']
+          $(document).on("click", "td[data-label='see-more']", function (event) {
+              event.stopPropagation(); // Prevent click from propagating to document
+              var target = $(this).find(".see-more");
+              target.slideToggle();
+              closeOtherDivs(target);
+          });
+  
+          // Prevent .see-more click from closing itself
+          $(".see-more").click(function (event) {
+              event.stopPropagation();
+          });
+  
+          // Close .see-more when clicking outside of it
+          $(document).click(function () {
+              hideAllDivs();
+          });
       });
-    </script>
+  </script>
    
   </body>
 </html>
